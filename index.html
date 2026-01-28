@@ -70,14 +70,6 @@
         /* Profile */
         .profile-content { max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; padding: 30px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(59,130,246,0.2); }
 
-        /* Profile Characters */
-        .profile-character { position: absolute; animation: float 3s ease-in-out infinite; opacity: 0.8; }
-        .character-left { left: 20px; top: 50%; transform: translateY(-50%); width: 260px; height: 260px; }
-        .character-right { right: 20px; top: 50%; transform: translateY(-50%) scaleX(-1); width: 260px; height: 260px; }
-        .profile-character img { width: 100%; height: 100%; object-fit: contain; }
-        /* Make white background blend into section color when removing background isn't available */
-        .remove-bg { mix-blend-mode: multiply; filter: contrast(1.02) saturate(1.02); }
-
         #profile { position: relative; overflow: hidden; }
 
         /* Boxes */
@@ -131,7 +123,6 @@
         .kontak-box:hover { transform: translateY(-10px); background: rgba(255,255,255,0.15); }
         .kontak-box h3 { color: white; font-size: 1.8rem; margin-bottom: 20px; border-bottom: 3px solid rgba(255,255,255,0.3); padding-bottom: 10px; display: flex; align-items: center; gap: 12px; }
         
-        /* Telephone Icon Animation */
         @keyframes ring { 0%, 100% { transform: rotate(0deg); } 10% { transform: rotate(-10deg); } 20% { transform: rotate(10deg); } 30% { transform: rotate(-10deg); } 40% { transform: rotate(10deg); } 50% { transform: rotate(0deg); } }
         @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); } 70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
         
@@ -140,121 +131,141 @@
         .kontak-item { padding: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.1); border-radius: 10px; transition: 0.3s; word-wrap: break-word; overflow-wrap: break-word; }
         .kontak-item:hover { background: rgba(255,255,255,0.2); transform: translateX(10px); }
         .kontak-item p { color: white; margin-bottom: 5px; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
+        .kontak-item a { color: white; text-decoration: none; font-weight: bold; }
 
         footer { background: #1e3c72; color: white; text-align: center; padding: 30px 20px; position: relative; }
 
+        /* Admin Button - Hidden by default */
+        .admin-access { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: linear-gradient(135deg, #ef4444, #dc2626); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 20px rgba(239,68,68,0.5); transition: 0.3s; z-index: 9999; opacity: 0; font-size: 1.5rem; animation: pulse 2s ease-in-out infinite; pointer-events: none; }
+        .admin-access:hover { transform: scale(1.15); box-shadow: 0 8px 25px rgba(239,68,68,0.7); }
+        .admin-access.show { opacity: 1; pointer-events: auto; }
+
+        /* Admin Panel Styles */
+        .admin-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(30,60,114,0.95)); z-index: 10000; overflow-y: auto; backdrop-filter: blur(5px); }
+        .admin-overlay.active { display: block; }
+        
+        .login-container { max-width: 500px; margin: 100px auto; background: linear-gradient(135deg, white, #f8fafc); padding: 60px 50px; border-radius: 25px; box-shadow: 0 30px 80px rgba(0,0,0,0.3); border: 2px solid rgba(59,130,246,0.15); }
+        .login-container h1 { color: #1e3c72; text-align: center; margin-bottom: 40px; font-size: 2rem; font-weight: 800; }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 12px; color: #1e3c72; font-weight: 700; font-size: 1rem; }
+        .form-group input { width: 100%; padding: 16px 18px; border: 2px solid #e5e7eb; border-radius: 12px; font-size: 1rem; transition: 0.3s; background: white; }
+        .form-group input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59,130,246,0.1); }
+        .btn-login { width: 100%; padding: 18px; background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 25px rgba(59,130,246,0.3); }
+        .btn-login:hover { transform: translateY(-4px); box-shadow: 0 15px 35px rgba(59,130,246,0.5); }
+        .error-message { color: #ef4444; text-align: center; margin-top: 20px; display: none; font-weight: 700; font-size: 1rem; }
+
+        .admin-container { display: none; max-width: 1600px; margin: 0 auto; padding: 40px 30px; min-height: 100vh; }
+        .admin-header { background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,249,255,0.95)); padding: 40px 45px; border-radius: 20px; margin-bottom: 35px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 15px 50px rgba(0,0,0,0.2); border-left: 8px solid #3b82f6; backdrop-filter: blur(10px); }
+        .admin-header h1 { color: #1e3c72; font-size: 2.2rem; font-weight: 900; margin: 0; }
+        .admin-buttons { display: flex; gap: 18px; }
+        .btn-close { padding: 14px 32px; background: linear-gradient(135deg, #8b5cf6, #a78bfa); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: 800; transition: 0.3s; box-shadow: 0 8px 20px rgba(139,92,246,0.3); font-size: 1rem; }
+        .btn-close:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(139,92,246,0.5); }
+        .btn-logout { padding: 14px 32px; background: linear-gradient(135deg, #ef4444, #f87171); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: 800; transition: 0.3s; box-shadow: 0 8px 20px rgba(239,68,68,0.3); font-size: 1rem; }
+        .btn-logout:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(239,68,68,0.5); }
+
+        .admin-tabs { display: flex; gap: 15px; margin-bottom: 35px; flex-wrap: wrap; background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); padding: 20px 30px; border-radius: 18px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .tab-btn { padding: 16px 28px; background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); border: 2px solid rgba(255,255,255,0.2); border-radius: 14px; cursor: pointer; font-weight: 800; transition: 0.4s; color: #e0e7ff; font-size: 1rem; backdrop-filter: blur(10px); }
+        .tab-btn:hover { background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15)); border-color: rgba(255,255,255,0.4); transform: translateY(-3px); }
+        .tab-btn.active { background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; box-shadow: 0 10px 30px rgba(59,130,246,0.5); border-color: #60a5fa; }
+
+        .tab-content { display: none; animation: fadeIn 0.5s ease-out; }
+        .tab-content.active { display: block; }
+
+        .form-section { margin-bottom: 40px; padding: 40px; background: linear-gradient(135deg, rgba(240,249,255,0.9), rgba(224,242,254,0.9)); border-radius: 18px; border-left: 8px solid #3b82f6; box-shadow: 0 10px 40px rgba(59,130,246,0.15); backdrop-filter: blur(10px); }
+        .form-section h3 { color: #1e3c72; margin-bottom: 30px; font-size: 1.6rem; font-weight: 900; }
+        .form-row { margin-bottom: 25px; }
+        .form-row label { display: block; margin-bottom: 10px; color: #1e3c72; font-weight: 800; font-size: 1rem; }
+        .form-row input, .form-row textarea, .form-row select { width: 100%; padding: 16px 18px; border: 2px solid #bfdbfe; border-radius: 12px; font-size: 1rem; transition: 0.3s; background: white; font-weight: 500; }
+        .form-row input:focus, .form-row textarea:focus, .form-row select:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59,130,246,0.15); background: #f0f9ff; }
+        .form-row textarea { min-height: 140px; resize: vertical; }
+
+        .btn-primary { padding: 16px 36px; background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: 800; margin-right: 14px; transition: 0.3s; box-shadow: 0 8px 20px rgba(59,130,246,0.3); font-size: 1rem; }
+        .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(59,130,246,0.5); }
+        .btn-primary:active { transform: translateY(-1px); }
+
+        .btn-danger { padding: 12px 22px; background: linear-gradient(135deg, #ef4444, #f87171); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 0.95rem; font-weight: 800; transition: 0.3s; box-shadow: 0 5px 15px rgba(239,68,68,0.2); }
+        .btn-danger:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(239,68,68,0.4); }
+
+        .data-list { margin-top: 45px; }
+        .data-list h3 { color: white; margin-bottom: 30px; font-size: 1.5rem; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .data-item { background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,249,255,0.95)); padding: 30px 35px; margin-bottom: 20px; border-radius: 16px; border-left: 5px solid #3b82f6; box-shadow: 0 8px 25px rgba(0,0,0,0.1); transition: 0.4s; }
+        .data-item:hover { transform: translateX(8px) translateY(-4px); box-shadow: 0 15px 40px rgba(59,130,246,0.2); }
+        .data-item h4 { color: #1e3c72; margin-bottom: 15px; font-size: 1.2rem; font-weight: 900; }
+        .data-item p { color: #4b5563; margin-bottom: 12px; font-size: 1rem; line-height: 1.6; }
+        .data-item-actions { margin-top: 20px; display: flex; gap: 12px; }
+
+        .success-message { background: linear-gradient(135deg, #10b981, #34d399); color: white; padding: 20px 28px; border-radius: 14px; margin-bottom: 30px; display: none; font-weight: 800; box-shadow: 0 8px 25px rgba(16,185,129,0.3); border-left: 5px solid #059669; font-size: 1.05rem; animation: slideDown 0.4s ease-out; }
+        
+        @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
-            .character-left, .character-right { width: 220px; height: 220px; }
             .hero h2 { font-size: 2.5rem; }
         }
 
         @media (max-width: 768px) {
             .container { padding: 0 15px; }
-            
-            /* Navigation */
             .nav-menu { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
             .nav-menu a { padding: 6px 12px; font-size: 0.9rem; }
             .logo h2 { font-size: 1.2rem; }
-            
-            /* Hero */
             .hero { padding: 120px 15px 60px; min-height: 400px; }
             .hero h1 { font-size: 1.8rem; }
             .hero h2 { font-size: 1.8rem; }
             .hero p { font-size: 1rem; }
-            
-            /* Sections */
             section { padding: 50px 15px; }
             .section-title { font-size: 2rem; margin-bottom: 2rem; }
-            
-            /* Profile */
-            #profile { position: relative; }
-            .profile-character { position: static !important; transform: none !important; width: 200px; height: 200px; margin: 20px auto; opacity: 1 !important; }
-            .character-left, .character-right { position: static !important; left: auto !important; right: auto !important; top: auto !important; width: 200px !important; height: 200px !important; }
-            .character-right { transform: scaleX(-1) !important; }
             .profile-content { font-size: 1rem; padding: 20px; }
-            
-            /* Cards */
             .card, .card2 { padding: 20px; }
             .card h4, .card2 h4 { font-size: 1.1rem; }
-            
-            /* Boxes */
             .box { padding: 25px; margin-bottom: 20px; }
             .box h3 { font-size: 1.5rem; margin-bottom: 1rem; }
             .box li { font-size: 1rem; margin-bottom: 10px; }
-            
-            /* Grid */
             .grid { gap: 15px; }
             .grid-item { padding: 15px; }
-            
-            /* Highlight Cards */
             .highlight-card { padding: 25px 20px; }
             .highlight-num { font-size: 1.8rem; width: 50px; height: 50px; }
             .highlight-card h3 { font-size: 1.3rem; }
             .highlight-card ul { padding-left: 15px; }
-            
-            /* Accordion */
             .accordion-header { padding: 12px 15px; font-size: 1rem; }
             .accordion-content { padding: 15px; }
-            
-            /* Kontak */
             .kontak-box { padding: 20px; }
             .kontak-box h3 { font-size: 1.3rem; }
-            
-            /* Floating Decorations - Hide on tablet */
             .floating-deco { font-size: 1.5rem !important; }
-            
-            /* Badge */
             .badge { padding: 4px 8px; font-size: 0.8rem; }
-            
-            /* Button */
             .btn { padding: 12px 30px; font-size: 1rem; }
+            .admin-header { flex-direction: column; gap: 15px; text-align: center; }
+            .admin-container { padding: 20px 15px; }
+            .admin-tabs { flex-direction: column; }
+            .tab-btn { width: 100%; }
+            .form-section { padding: 25px 20px; }
+            .btn-primary { padding: 14px 24px; font-size: 0.95rem; margin-right: 8px; margin-bottom: 8px; }
         }
 
         @media (max-width: 480px) {
-            * { margin: 0; padding: 0; }
             .container { padding: 0 20px; }
-            
-            /* Header & Navigation */
             header { padding: 0.8rem 0; }
             .navbar .container { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
             .nav-menu { flex-direction: row; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
             .nav-menu a { padding: 6px 10px; font-size: 0.8rem; }
             .logo h2 { font-size: 1rem; }
-            
-            /* Hero */
             .hero { padding: 110px 20px 60px; min-height: 380px; }
             .hero h1 { font-size: 1.6rem; margin-bottom: 0.8rem; }
             .hero h2 { font-size: 1.8rem; margin-bottom: 1rem; }
             .hero p { font-size: 0.95rem; margin-bottom: 1.5rem; }
-            
-            /* Sections */
             section { padding: 50px 20px; }
             .section-title { font-size: 1.6rem; margin-bottom: 2rem; padding-bottom: 12px; }
             .section-title::after { width: 80px; height: 3px; }
-            
-            /* Profile */
-            .profile-character { width: 160px; height: 160px; margin: 20px auto; }
-            .character-left, .character-right { width: 160px !important; height: 160px !important; }
             .profile-content { font-size: 0.95rem; padding: 20px; line-height: 1.6; }
             .profile-content p { line-height: 1.5; margin-bottom: 10px; }
-            
-            /* Cards */
             .card, .card2 { padding: 18px; margin-bottom: 14px; }
             .card h4, .card2 h4 { font-size: 1rem; margin-bottom: 8px; }
             .card p, .card2 p { font-size: 0.9rem; }
-            
-            /* Boxes */
             .box { padding: 20px; margin-bottom: 18px; border-left-width: 4px; }
             .box h3 { font-size: 1.3rem; margin-bottom: 1rem; }
             .box ol, .box ul { padding-left: 18px; margin-top: 0.8rem; }
             .box li { font-size: 0.9rem; margin-bottom: 8px; line-height: 1.4; }
-            
-            /* Grid */
             .grid { gap: 14px; }
             .grid-item { padding: 16px; font-size: 0.9rem; line-height: 1.5; }
-            
-            /* Highlight Cards */
             .highlight-card { padding: 18px; margin-bottom: 16px; animation: none; }
             .highlight-card:nth-child(even) { animation: none; }
             .highlight-num { font-size: 1.5rem; width: 45px; height: 45px; line-height: 45px; }
@@ -263,38 +274,218 @@
             .highlight-card img { margin: 10px 0 !important; }
             .highlight-card ul { padding-left: 14px; }
             .highlight-card li { font-size: 0.85rem; margin-bottom: 6px; line-height: 1.4; }
-            
-            /* Accordion */
             .accordion-header { padding: 14px 18px; font-size: 0.95rem; margin-bottom: 8px; }
             .accordion-content { padding: 16px 18px; }
             .accordion-content ul { padding-left: 14px; }
             .accordion-content li { font-size: 0.85rem; margin-bottom: 6px; line-height: 1.4; }
-            
-            /* Kontak */
             .kontak-box { padding: 18px; margin-bottom: 18px; }
             .kontak-box h3 { font-size: 1.1rem; margin-bottom: 14px; flex-wrap: wrap; }
             .kontak-item { padding: 12px; margin-bottom: 12px; }
             .kontak-item p { font-size: 0.85rem; margin-bottom: 4px; }
-            
-            /* Footer */
             footer { padding: 20px 12px; }
             footer p { font-size: 0.9rem; line-height: 1.4; }
-            
-            /* Floating Decorations - Hide on mobile */
             .floating-deco { display: none !important; }
-            
-            /* Badge & Emoji */
             .badge { padding: 4px 7px; font-size: 0.75rem; margin-left: 4px; animation: none; }
             .fun-emoji { font-size: 1.1rem; animation: none; }
             .phone-icon { font-size: 1.3rem; }
-            
-            /* Button */
             .btn { padding: 10px 20px; font-size: 0.85rem; animation: fadeIn 1s 0.6s both !important; }
             .btn:hover { transform: translateY(-2px); }
         }
     </style>
 </head>
 <body>
+    <!-- Admin Access Button (Hidden, Activated by Triple-Click atau Ctrl+Alt+A) -->
+    <div class="admin-access" id="adminAccessBtn" onclick="openAdminPanel()">🔐</div>
+
+    <!-- Admin Panel Overlay -->
+    <div class="admin-overlay" id="adminOverlay">
+        <!-- Login Form -->
+        <div id="loginContainer" class="login-container">
+            <h1>🔐 Admin Login</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn-login">Login</button>
+                <div class="error-message" id="errorMessage">Username atau password salah!</div>
+            </form>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="adminContainer" class="admin-container">
+            <div class="admin-header">
+                <h1>📊 Admin Panel - Karang Taruna</h1>
+                <div class="admin-buttons">
+                    <button class="btn-close" onclick="closeAdminPanel()">Tutup</button>
+                    <button class="btn-logout" onclick="logoutAdmin()">Logout</button>
+                </div>
+            </div>
+
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="switchTab('kegiatan')">🎯 Kegiatan</button>
+                <button class="tab-btn" onclick="switchTab('program')">📚 Program Kerja</button>
+                <button class="tab-btn" onclick="switchTab('pengurus')">👥 Pengurus</button>
+                <button class="tab-btn" onclick="switchTab('kontak')">📞 Kontak</button>
+            </div>
+
+            <!-- Tab Kegiatan -->
+            <div id="tabKegiatan" class="tab-content active">
+                <div class="success-message" id="successKegiatan"></div>
+                <div class="form-section">
+                    <h3>Tambah/Edit Kegiatan</h3>
+                    <form id="formKegiatan">
+                        <input type="hidden" id="kegiatanId">
+                        <div class="form-row">
+                            <label>Judul Kegiatan</label>
+                            <input type="text" id="kegiatanJudul" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Penanggung Jawab</label>
+                            <input type="text" id="kegiatanPJ" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Icon/Emoji</label>
+                            <input type="text" id="kegiatanIcon" placeholder="📚 atau 🏗️">
+                        </div>
+                        <div class="form-row">
+                            <label>Foto</label>
+                            <input type="file" id="kegiatanFoto" accept="image/*">
+                            <img id="kegiatanFotoPreview" style="max-width: 300px; margin-top: 15px; border-radius: 12px; display: none;">
+                        </div>
+                        <div class="form-row">
+                            <label>Poin/Deskripsi (satu per baris)</label>
+                            <textarea id="kegiatanPoin" placeholder="✅ Poin pertama&#10;✅ Poin kedua&#10;✅ Poin ketiga"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Simpan Kegiatan</button>
+                        <button type="button" class="btn-primary" onclick="resetFormKegiatan()" style="background: #6b7280;">Reset</button>
+                    </form>
+                </div>
+                <div class="data-list">
+                    <h3>Daftar Kegiatan</h3>
+                    <div id="listKegiatan"></div>
+                </div>
+            </div>
+
+            <!-- Tab Program Kerja -->
+            <div id="tabProgram" class="tab-content">
+                <div class="success-message" id="successProgram"></div>
+                <div class="form-section">
+                    <h3>Tambah/Edit Program Kerja</h3>
+                    <form id="formProgram">
+                        <input type="hidden" id="programId">
+                        <div class="form-row">
+                            <label>Nama Program</label>
+                            <input type="text" id="programNama" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Seksi</label>
+                            <select id="programSeksi" required>
+                                <option value="">Pilih Seksi</option>
+                                <option value="Kerohanian">🙏 Seksi Kerohanian</option>
+                                <option value="Humas">📢 Seksi Humas</option>
+                                <option value="Pendidikan">📚 Seksi Pendidikan</option>
+                                <option value="Lingkungan">🌱 Seksi Lingkungan Hidup</option>
+                                <option value="Kesejahteraan">❤️ Seksi Kesejahteraan Rakyat</option>
+                                <option value="Olahraga">⚽ Seksi Olahraga</option>
+                                <option value="Bersama">🚀 Kegiatan Bersama</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label>Waktu/Tanggal</label>
+                            <input type="text" id="programWaktu" placeholder="2026 atau Ramadhan 2026">
+                        </div>
+                        <button type="submit" class="btn-primary">Simpan Program</button>
+                        <button type="button" class="btn-primary" onclick="resetFormProgram()" style="background: #6b7280;">Reset</button>
+                    </form>
+                </div>
+                <div class="data-list">
+                    <h3>Daftar Program Kerja</h3>
+                    <div id="listProgram"></div>
+                </div>
+            </div>
+
+            <!-- Tab Pengurus -->
+            <div id="tabPengurus" class="tab-content">
+                <div class="success-message" id="successPengurus"></div>
+                <div class="form-section">
+                    <h3>Tambah/Edit Pengurus</h3>
+                    <form id="formPengurus">
+                        <input type="hidden" id="pengurusId">
+                        <div class="form-row">
+                            <label>Nama Pengurus</label>
+                            <input type="text" id="pengurusNama" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Kategori</label>
+                            <select id="pengurusKategori" required>
+                                <option value="">Pilih Kategori</option>
+                                <option value="inti">Pengurus Inti</option>
+                                <option value="seksi">Seksi</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label>Jabatan/Seksi</label>
+                            <input type="text" id="pengurusJabatan" placeholder="Ketua, Humas, dll" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Icon/Emoji</label>
+                            <input type="text" id="pengurusIcon" placeholder="👑 atau 📢">
+                        </div>
+                        <button type="submit" class="btn-primary">Simpan Pengurus</button>
+                        <button type="button" class="btn-primary" onclick="resetFormPengurus()" style="background: #6b7280;">Reset</button>
+                    </form>
+                </div>
+                <div class="data-list">
+                    <h3>Daftar Pengurus</h3>
+                    <div id="listPengurus"></div>
+                </div>
+            </div>
+
+            <!-- Tab Kontak -->
+            <div id="tabKontak" class="tab-content">
+                <div class="success-message" id="successKontak"></div>
+                <div class="form-section">
+                    <h3>Edit Kontak</h3>
+                    <form id="formKontak">
+                        <input type="hidden" id="kontakId">
+                        <div class="form-row">
+                            <label>Kategori</label>
+                            <select id="kontakKategori" required>
+                                <option value="">Pilih Kategori</option>
+                                <option value="narahubung">Narahubung</option>
+                                <option value="sosmed">Media Sosial & Email</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label>Label</label>
+                            <input type="text" id="kontakLabel" placeholder="Contoh: Anwar Fauzi atau Instagram" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Nilai (Nomor HP/Username/Email/Link)</label>
+                            <input type="text" id="kontakNilai" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Icon/Emoji</label>
+                            <input type="text" id="kontakIcon" placeholder="👤 atau 📸">
+                        </div>
+                        <button type="submit" class="btn-primary">Simpan Kontak</button>
+                        <button type="button" class="btn-primary" onclick="resetFormKontak()" style="background: #6b7280;">Reset</button>
+                    </form>
+                </div>
+
+                <div class="data-list">
+                    <h3>Daftar Kontak</h3>
+                    <div id="listKontak"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <header>
         <nav class="navbar">
             <div class="container">
@@ -321,7 +512,6 @@
     </section>
 
     <section id="profile" class="bg-blue">
-
         <div class="container">
             <h2 class="section-title">Profil Karang Taruna</h2>
             <div class="profile-content">
@@ -388,7 +578,7 @@
             <h3 style="text-align:center; font-size:2rem; color:#1e3c72; margin:50px 0 30px;">Seksi-Seksi <span class="badge">⚡ Tim Solid</span></h3>
             <div class="grid">
                 <div class="card2"><h4>🙏 Seksi Kerohanian</h4><p>Miftahul Chair<br>Rafli Salim</p></div>
-                <div class="card2"><h4>📢 Seksi Humas</h4><p>Shafira Syabania<br>Dimas Algifari<br><p>Ardian Ramadhani<br>Carudin</p></div>
+                <div class="card2"><h4>📢 Seksi Humas</h4><p>Shafira Syabania<br>Dimas Algifari<br>Ardian Ramadhani<br>Carudin</p></div>
                 <div class="card2"><h4>📚 Seksi Pendidikan, Pelatihan, Perempuan & Anak</h4><p>Siti Fatimah<br>Reza Aulia<br>Kyla<br>Salwa Salsabillah</p></div>
                 <div class="card2"><h4>🌱 Seksi Lingkungan Hidup</h4><p>M. Ilyas<br>Aji Febriyanto</p></div>
                 <div class="card2"><h4>❤️ Seksi Kesejahteraan Rakyat</h4><p>Karyadi Utama<br>Tiara Noviyanti<br>Putri Adelia</p></div>
@@ -429,7 +619,7 @@
                     <div class="highlight-num">👥</div>
                     <h3>Kepemimpinan Generasi Maju</h3>
                     <p><strong>Penanggung Jawab:</strong> Semua Seksi</p>
-                    <img src="generasi-maju.jpg" alt="Gerakan Beasiswa & Pendidikan Pemuda" style="width: 100%; height: auto; border-radius: 10px; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <img src="generasi-maju.jpg" alt="Kepemimpinan Generasi Maju" style="width: 100%; height: auto; border-radius: 10px; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                     <ul>
                         <li>✅ Kaderisasi Sistematis - Membentuk 50 calon pemimpin muda berintegritas</li>
                         <li>✅ Kurikulum Terstandarisasi - Modul kepemimpinan berbasis kompetensi nasional</li>
@@ -461,9 +651,9 @@
             </div>
 
             <h2 class="section-title" style="margin-top:60px;">Program Kerja 2026 <span class="fun-emoji">💪</span></h2>
-            <div class="accordion">
+            <div class="accordion" id="programKerjaList">
                 <div class="accordion-item">
-                    <div class="accordion-header">🙏 Seksi Kerohanian</div>
+                    <div class="accordion-header" onclick="toggleAccordion(event)">🙏 Seksi Kerohanian</div>
                     <div class="accordion-content">
                         <ul>
                             <li>Pawai Isra Mi'raj - 2026</li>
@@ -475,7 +665,7 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <div class="accordion-header">📢 Seksi Humas</div>
+                    <div class="accordion-header" onclick="toggleAccordion(event)">📢 Seksi Humas</div>
                     <div class="accordion-content">
                         <ul> 
                            <li>Silaturahmi dengan UKKT se-Pademangan Timur - Januari 2026</li>
@@ -487,7 +677,7 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <div class="accordion-header">📚 Seksi Pendidikan, Pelatihan, Perempuan & Anak</div>
+                    <div class="accordion-header" onclick="toggleAccordion(event)">📚 Seksi Pendidikan, Pelatihan, Perempuan & Anak</div>
                     <div class="accordion-content">
                         <ul>
                             <li>Sosialisasi Beasiswa dengan Universitas dan SMA/SMK 2026</li>
@@ -497,7 +687,7 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <div class="accordion-header">🌱 Seksi Lingkungan Hidup</div>
+                    <div class="accordion-header" onclick="toggleAccordion(event)">🌱 Seksi Lingkungan Hidup</div>
                     <div class="accordion-content">
                         <ul>
                             <li>Kerja Bakti se-Kelurahan Pademangan Timur - Januari - Desember 2026</li> 
@@ -508,7 +698,7 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <div class="accordion-header">❤️ Seksi Kesejahteraan Rakyat</div>
+                    <div class="accordion-header" onclick="toggleAccordion(event)">❤️ Seksi Kesejahteraan Rakyat</div>
                     <div class="accordion-content">
                         <ul>
                             <li>Bulan Bakti Karang Taruna ke-67 (bakti sosial) - September & Oktober 2026</li> 
@@ -518,7 +708,7 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <div class="accordion-header">⚽ Seksi Olahraga</div>
+                    <div class="accordion-header" onclick="toggleAccordion(event)">⚽ Seksi Olahraga</div>
                     <div class="accordion-content">
                         <ul>
                             <li>Have Fun Badminton, Tenis Meja, Catur & Futsal - 2026</li>
@@ -528,7 +718,7 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <div class="accordion-header">🚀 Kegiatan Bersama Semua Seksi</div>
+                    <div class="accordion-header" onclick="toggleAccordion(event)">🚀 Kegiatan Bersama Semua Seksi</div>
                     <div class="accordion-content">
                         <ul>
                             <li>Latihan Kepemimpinan Karang Taruna - 2026</li> 
@@ -549,17 +739,11 @@
             <div class="grid">
                 <div class="kontak-box">
                     <h3><span class="phone-icon pulse">☎️</span>Narahubung</h3>
-                    <div class="kontak-item"><p><strong>👤 Anwar Fauzi</strong></p><p>0896-9859-1876</p></div>
-                    <div class="kontak-item"><p><strong>👤 Dimas</strong></p><p>0877-8185-8105</p></div>
-                    <div class="kontak-item"><p><strong>👤 Ardian Ramadhani</strong></p><p>0812-9843-7997</p></div>
-                    <div class="kontak-item"><p><strong>👤 Shafira Syabania</strong></p><p>0881-0124-95882</p></div>
+                    <div id="narahubungBox"></div>
                 </div>
                 <div class="kontak-box">
                     <h3><span class="phone-icon ring">📱</span>Media Sosial & Email <span class="fun-emoji">💌</span></h3>
-                    <div class="kontak-item"><p><strong>📸 Instagram:</strong> <a href="https://www.instagram.com/karangtaruna.padtim?igsh=MXg5dWRmcDI3Nmk5" target="_blank" style="color: white; text-decoration: none; font-weight: bold;">@karangtaruna.padtim</a></p></div>
-                    <div class="kontak-item"><p><strong>✉️ Email:</strong> <a href="mailto:pademangantimurkarangtaruna@gmail.com" style="color: white; text-decoration: none; font-weight: bold;">pademangantimurkarangtaruna@gmail.com</a></p></div>
-                    <div class="kontak-item"><p><strong>📺 YouTube:</strong> <a href="https://youtube.com/@karangtarunapadtimura?si=WSctfCdaOLyUcjwF" target="_blank" style="color: white; text-decoration: none; font-weight: bold;">@karangtarunapadtimura</a></p></div>
-                    <div class="kontak-item"><p><strong>🎵 TikTok:</strong> <a href="https://www.tiktok.com/@karangtaruna.padtim?_r=1&_t=ZS-930KBfg0R9j" target="_blank" style="color: white; text-decoration: none; font-weight: bold;">@karangtaruna.padtim</a></p></div>
+                    <div id="sosmedBox"></div>
                 </div>
             </div>
         </div>
@@ -574,20 +758,707 @@
     </footer>
 
     <script>
+        // ==================== ADMIN CREDENTIALS ====================
+        const ADMIN_CREDENTIALS = {
+            username: 'admin',
+            password: 'karangtaruna2026'
+        };
+
+        // ==================== ACCORDION TOGGLE ====================
+        function toggleAccordion(event) {
+            event.stopPropagation();
+            const header = event.target;
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // ==================== ADMIN ACCESS ====================
+        let clickCount = 0;
+        let lastClickTime = 0;
+        const clickTimeout = 400;
+        
+        document.addEventListener('mousedown', function(e) {
+            const now = Date.now();
+            
+            if (now - lastClickTime > clickTimeout) {
+                clickCount = 1;
+            } else {
+                clickCount++;
+            }
+            
+            lastClickTime = now;
+            
+            if (clickCount >= 3) {
+                clickCount = 0;
+                showAdminButton();
+            }
+        });
+        
+        function showAdminButton() {
+            const btn = document.getElementById('adminAccessBtn');
+            if (btn) {
+                btn.classList.add('show');
+                setTimeout(() => {
+                    btn.classList.remove('show');
+                }, 5000);
+            }
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.altKey && (e.key === 'a' || e.key === 'A')) {
+                e.preventDefault();
+                showAdminButton();
+            }
+        });
+
+        // ==================== ADMIN FUNCTIONS ====================
+        function openAdminPanel() {
+            document.getElementById('adminOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAdminPanel() {
+            refreshWebsiteContent();
+            document.getElementById('adminOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            setTimeout(() => {
+                const kontakSection = document.getElementById('kontak');
+                if (kontakSection) {
+                    kontakSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 300);
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminOverlay').classList.remove('active');
+            document.getElementById('adminContainer').style.display = 'none';
+            document.getElementById('loginContainer').style.display = 'block';
+            document.body.style.overflow = 'auto';
+            document.getElementById('loginForm').reset();
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('adminContainer').style.display = 'block';
+                loadAllData();
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        });
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1)).classList.add('active');
+        }
+
+        // ==================== KONTAK FUNCTIONS ====================
+        document.getElementById('formKontak').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const id = document.getElementById('kontakId').value || Date.now().toString();
+            const kategori = document.getElementById('kontakKategori').value;
+            const label = document.getElementById('kontakLabel').value;
+            const nilai = document.getElementById('kontakNilai').value;
+            const icon = document.getElementById('kontakIcon').value;
+            
+            let kontak = JSON.parse(localStorage.getItem('kontak')) || [];
+            const data = { id, kategori, label, nilai, icon };
+            
+            const index = kontak.findIndex(k => k.id === id);
+            if (index >= 0) {
+                kontak[index] = data;
+            } else {
+                kontak.push(data);
+            }
+            
+            localStorage.setItem('kontak', JSON.stringify(kontak));
+            showSuccess('successKontak', '✅ Kontak berhasil disimpan!');
+            resetFormKontak();
+            loadKontak();
+            refreshWebsiteContent();
+        });
+
+        function loadKontak() {
+            const kontak = JSON.parse(localStorage.getItem('kontak')) || [];
+            const listEl = document.getElementById('listKontak');
+            
+            if (kontak.length === 0) {
+                listEl.innerHTML = '<p style="color: #666;">Belum ada data kontak.</p>';
+                return;
+            }
+            
+            listEl.innerHTML = kontak.map(k => `
+                <div class="data-item">
+                    <h4>${k.icon} ${k.label}</h4>
+                    <p><strong>Kategori:</strong> ${k.kategori === 'narahubung' ? 'Narahubung' : 'Media Sosial & Email'}</p>
+                    <p><strong>Nilai:</strong> ${k.nilai}</p>
+                    <div class="data-item-actions">
+                        <button class="btn-primary" onclick="editKontak('${k.id}')">Edit</button>
+                        <button class="btn-danger" onclick="deleteKontak('${k.id}')">Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function editKontak(id) {
+            const kontak = JSON.parse(localStorage.getItem('kontak')) || [];
+            const data = kontak.find(k => k.id === id);
+            if (data) {
+                document.getElementById('kontakId').value = data.id;
+                document.getElementById('kontakKategori').value = data.kategori;
+                document.getElementById('kontakLabel').value = data.label;
+                document.getElementById('kontakNilai').value = data.nilai;
+                document.getElementById('kontakIcon').value = data.icon;
+                document.getElementById('adminOverlay').scrollTop = 0;
+            }
+        }
+
+        function deleteKontak(id) {
+            if (confirm('Yakin ingin menghapus kontak ini?')) {
+                let kontak = JSON.parse(localStorage.getItem('kontak')) || [];
+                kontak = kontak.filter(k => k.id !== id);
+                localStorage.setItem('kontak', JSON.stringify(kontak));
+                showSuccess('successKontak', '✅ Kontak berhasil dihapus!');
+                loadKontak();
+                refreshWebsiteContent();
+            }
+        }
+
+        function resetFormKontak() {
+            document.getElementById('formKontak').reset();
+            document.getElementById('kontakId').value = '';
+        }
+
+        function showSuccess(elementId, message) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            el.style.display = 'block';
+            setTimeout(() => {
+                el.style.display = 'none';
+            }, 3000);
+        }
+
+        function loadAllData() {
+            loadKegiatan();
+            loadProgram();
+            loadPengurus();
+            loadKontak();
+        }
+
+        // ==================== KEGIATAN FUNCTIONS ====================
+        document.getElementById('formKegiatan').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const id = document.getElementById('kegiatanId').value || Date.now().toString();
+            const judul = document.getElementById('kegiatanJudul').value;
+            const pj = document.getElementById('kegiatanPJ').value;
+            const icon = document.getElementById('kegiatanIcon').value;
+            const fotoFile = document.getElementById('kegiatanFoto').files[0];
+            const poin = document.getElementById('kegiatanPoin').value.split('\n').filter(p => p.trim());
+            
+            if (fotoFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const foto = e.target.result;
+                    let kegiatan = JSON.parse(localStorage.getItem('kegiatan')) || [];
+                    const data = { id, icon, judul, pj, foto, poin };
+                    
+                    const index = kegiatan.findIndex(k => k.id === id);
+                    if (index >= 0) {
+                        kegiatan[index] = data;
+                    } else {
+                        kegiatan.push(data);
+                    }
+                    
+                    localStorage.setItem('kegiatan', JSON.stringify(kegiatan));
+                    showSuccess('successKegiatan', '✅ Kegiatan berhasil disimpan!');
+                    resetFormKegiatan();
+                    loadKegiatan();
+                    refreshWebsiteContent();
+                };
+                reader.readAsDataURL(fotoFile);
+            } else {
+                let kegiatan = JSON.parse(localStorage.getItem('kegiatan')) || [];
+                const existingData = kegiatan.find(k => k.id === id);
+                const foto = existingData ? existingData.foto : '';
+                const data = { id, icon, judul, pj, foto, poin };
+                
+                const index = kegiatan.findIndex(k => k.id === id);
+                if (index >= 0) {
+                    kegiatan[index] = data;
+                } else {
+                    kegiatan.push(data);
+                }
+                
+                localStorage.setItem('kegiatan', JSON.stringify(kegiatan));
+                showSuccess('successKegiatan', '✅ Kegiatan berhasil disimpan!');
+                resetFormKegiatan();
+                loadKegiatan();
+                refreshWebsiteContent();
+            }
+        });
+
+        document.getElementById('kegiatanFoto').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('kegiatanFotoPreview').src = e.target.result;
+                    document.getElementById('kegiatanFotoPreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function loadKegiatan() {
+            const kegiatan = JSON.parse(localStorage.getItem('kegiatan')) || [];
+            const listEl = document.getElementById('listKegiatan');
+            
+            if (kegiatan.length === 0) {
+                listEl.innerHTML = '<p style="color: #666;">Belum ada data kegiatan.</p>';
+                return;
+            }
+            
+            listEl.innerHTML = kegiatan.map(k => `
+                <div class="data-item">
+                    <h4>${k.icon} ${k.judul}</h4>
+                    <p><strong>Penanggung Jawab:</strong> ${k.pj}</p>
+                    <p><strong>Poin:</strong> ${k.poin.join(' | ')}</p>
+                    <div class="data-item-actions">
+                        <button class="btn-primary" onclick="editKegiatan('${k.id}')">Edit</button>
+                        <button class="btn-danger" onclick="deleteKegiatan('${k.id}')">Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function editKegiatan(id) {
+            const kegiatan = JSON.parse(localStorage.getItem('kegiatan')) || [];
+            const data = kegiatan.find(k => k.id === id);
+            if (data) {
+                document.getElementById('kegiatanId').value = data.id;
+                document.getElementById('kegiatanJudul').value = data.judul;
+                document.getElementById('kegiatanPJ').value = data.pj;
+                document.getElementById('kegiatanIcon').value = data.icon;
+                document.getElementById('kegiatanPoin').value = data.poin.join('\n');
+                if (data.foto) {
+                    document.getElementById('kegiatanFotoPreview').src = data.foto;
+                    document.getElementById('kegiatanFotoPreview').style.display = 'block';
+                }
+                document.getElementById('adminOverlay').scrollTop = 0;
+            }
+        }
+
+        function deleteKegiatan(id) {
+            if (confirm('Yakin ingin menghapus kegiatan ini?')) {
+                let kegiatan = JSON.parse(localStorage.getItem('kegiatan')) || [];
+                kegiatan = kegiatan.filter(k => k.id !== id);
+                localStorage.setItem('kegiatan', JSON.stringify(kegiatan));
+                showSuccess('successKegiatan', '✅ Kegiatan berhasil dihapus!');
+                loadKegiatan();
+                refreshWebsiteContent();
+            }
+        }
+
+        function resetFormKegiatan() {
+            document.getElementById('formKegiatan').reset();
+            document.getElementById('kegiatanId').value = '';
+            document.getElementById('kegiatanFotoPreview').style.display = 'none';
+        }
+
+        // ==================== PROGRAM FUNCTIONS ====================
+        document.getElementById('formProgram').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const id = document.getElementById('programId').value || Date.now().toString();
+            const nama = document.getElementById('programNama').value;
+            const seksi = document.getElementById('programSeksi').value;
+            const waktu = document.getElementById('programWaktu').value;
+            
+            let program = JSON.parse(localStorage.getItem('program')) || [];
+            const data = { id, nama, seksi, waktu };
+            
+            const index = program.findIndex(p => p.id === id);
+            if (index >= 0) {
+                program[index] = data;
+            } else {
+                program.push(data);
+            }
+            
+            localStorage.setItem('program', JSON.stringify(program));
+            showSuccess('successProgram', '✅ Program berhasil disimpan!');
+            resetFormProgram();
+            loadProgram();
+            refreshWebsiteContent();
+        });
+
+        function loadProgram() {
+            const program = JSON.parse(localStorage.getItem('program')) || [];
+            const listEl = document.getElementById('listProgram');
+            
+            if (program.length === 0) {
+                listEl.innerHTML = '<p style="color: #666;">Belum ada data program.</p>';
+                return;
+            }
+            
+            listEl.innerHTML = program.map(p => `
+                <div class="data-item">
+                    <h4>${p.nama}</h4>
+                    <p><strong>Seksi:</strong> ${p.seksi}</p>
+                    <p><strong>Waktu:</strong> ${p.waktu}</p>
+                    <div class="data-item-actions">
+                        <button class="btn-primary" onclick="editProgram('${p.id}')">Edit</button>
+                        <button class="btn-danger" onclick="deleteProgram('${p.id}')">Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function editProgram(id) {
+            const program = JSON.parse(localStorage.getItem('program')) || [];
+            const data = program.find(p => p.id === id);
+            if (data) {
+                document.getElementById('programId').value = data.id;
+                document.getElementById('programNama').value = data.nama;
+                document.getElementById('programSeksi').value = data.seksi;
+                document.getElementById('programWaktu').value = data.waktu;
+                document.getElementById('adminOverlay').scrollTop = 0;
+            }
+        }
+
+        function deleteProgram(id) {
+            if (confirm('Yakin ingin menghapus program ini?')) {
+                let program = JSON.parse(localStorage.getItem('program')) || [];
+                program = program.filter(p => p.id !== id);
+                localStorage.setItem('program', JSON.stringify(program));
+                showSuccess('successProgram', '✅ Program berhasil dihapus!');
+                loadProgram();
+                refreshWebsiteContent();
+            }
+        }
+
+        function resetFormProgram() {
+            document.getElementById('formProgram').reset();
+            document.getElementById('programId').value = '';
+        }
+
+        // ==================== PENGURUS FUNCTIONS ====================
+        document.getElementById('formPengurus').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const id = document.getElementById('pengurusId').value || Date.now().toString();
+            const nama = document.getElementById('pengurusNama').value;
+            const kategori = document.getElementById('pengurusKategori').value;
+            const jabatan = document.getElementById('pengurusJabatan').value;
+            const icon = document.getElementById('pengurusIcon').value;
+            
+            let pengurus = JSON.parse(localStorage.getItem('pengurus')) || [];
+            const data = { id, icon, nama, kategori, jabatan };
+            
+            const index = pengurus.findIndex(p => p.id === id);
+            if (index >= 0) {
+                pengurus[index] = data;
+            } else {
+                pengurus.push(data);
+            }
+            
+            localStorage.setItem('pengurus', JSON.stringify(pengurus));
+            showSuccess('successPengurus', '✅ Pengurus berhasil disimpan!');
+            resetFormPengurus();
+            loadPengurus();
+            refreshWebsiteContent();
+        });
+
+        function loadPengurus() {
+            const pengurus = JSON.parse(localStorage.getItem('pengurus')) || [];
+            const listEl = document.getElementById('listPengurus');
+            
+            if (pengurus.length === 0) {
+                listEl.innerHTML = '<p style="color: #666;">Belum ada data pengurus.</p>';
+                return;
+            }
+            
+            listEl.innerHTML = pengurus.map(p => `
+                <div class="data-item">
+                    <h4>${p.icon} ${p.nama}</h4>
+                    <p><strong>Kategori:</strong> ${p.kategori === 'inti' ? 'Pengurus Inti' : 'Seksi'}</p>
+                    <p><strong>Jabatan:</strong> ${p.jabatan}</p>
+                    <div class="data-item-actions">
+                        <button class="btn-primary" onclick="editPengurus('${p.id}')">Edit</button>
+                        <button class="btn-danger" onclick="deletePengurus('${p.id}')">Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function editPengurus(id) {
+            const pengurus = JSON.parse(localStorage.getItem('pengurus')) || [];
+            const data = pengurus.find(p => p.id === id);
+            if (data) {
+                document.getElementById('pengurusId').value = data.id;
+                document.getElementById('pengurusNama').value = data.nama;
+                document.getElementById('pengurusKategori').value = data.kategori;
+                document.getElementById('pengurusJabatan').value = data.jabatan;
+                document.getElementById('pengurusIcon').value = data.icon;
+                document.getElementById('adminOverlay').scrollTop = 0;
+            }
+        }
+
+        function deletePengurus(id) {
+            if (confirm('Yakin ingin menghapus pengurus ini?')) {
+                let pengurus = JSON.parse(localStorage.getItem('pengurus')) || [];
+                pengurus = pengurus.filter(p => p.id !== id);
+                localStorage.setItem('pengurus', JSON.stringify(pengurus));
+                showSuccess('successPengurus', '✅ Pengurus berhasil dihapus!');
+                loadPengurus();
+                refreshWebsiteContent();
+            }
+        }
+
+        function resetFormPengurus() {
+            document.getElementById('formPengurus').reset();
+            document.getElementById('pengurusId').value = '';
+        }
+
+        function refreshWebsiteContent() {
+            refreshKegiatan();
+            refreshProgram();
+            refreshPengurus();
+            refreshKontak();
+        }
+
+        // ==================== REFRESH KEGIATAN ====================
+        function refreshKegiatan() {
+            const kegiatanAdmin = JSON.parse(localStorage.getItem('kegiatan')) || [];
+            
+            const kegiatanDefault = [
+                { id: 'default-1', icon: '📚', judul: 'Gerakan Beasiswa & Pendidikan Pemuda', pj: 'Seksi Pendidikan, Pelatihan, Perempuan & Anak', foto: 'gerakan-beasiswa.jpg', poin: ['✅ Transformasi Masa Depan - Membuka akses pendidikan tinggi bagi pemuda kurang mampu', '✅ Kemitraan Multi-Institusi - Kolaborasi dengan berbagai perguruan tinggi dan sekolah', '✅ Dampak Jangka Panjang - Investasi sumber daya manusia untuk kemajuan kelurahan'] },
+                { id: 'default-2', icon: '🏗️', judul: 'Revitalisasi Total Infrastruktur Pemuda', pj: 'Seksi Lingkungan Hidup', foto: 'Revitalisasi-Total.jpg', poin: ['✅ Transformasi Fisik Nyata - Perbaikan menyeluruh sarana pemuda di semua RW', '✅ Lingkungan Berkelanjutan - Menciptakan ruang hijau dan fasilitas ramah lingkungan'] },
+                { id: 'default-3', icon: '👥', judul: 'Kepemimpinan Generasi Maju', pj: 'Semua Seksi', foto: 'generasi-maju.jpg', poin: ['✅ Kaderisasi Sistematis - Membentuk 50 calon pemimpin muda berintegritas', '✅ Kurikulum Terstandarisasi - Modul kepemimpinan berbasis kompetensi nasional', '✅ Jaringan Nasional - Peluang kolaborasi dengan lembaga kepemimpinan terkemuka'] },
+                { id: 'default-4', icon: '⚽', judul: 'Pekan Olahraga Pemersatu Masyarakat', pj: 'Seksi Olahraga', foto: 'badminton-kegiatan.jpg', poin: ['✅ Pemersatu Multigenerasi - Menyatukan anak-anak, remaja, dewasa, dan lansia', '✅ Promosi Gaya Hidup Sehat - Kampanye kesehatan melalui olahraga massal', '✅ Event Signature Tahunan - Menjadi agenda tetap yang dinanti masyarakat'] },
+                { id: 'default-5', icon: '🤝', judul: 'Jembatan Aspirasi & Kolaborasi Strategis', pj: 'Seksi Humas', foto: 'jembatan-aspirasi.jpg', poin: ['✅ Akses Pengambilan Kebijakan - Penyampaian aspirasi langsung ke eksekutif dan legislatif', '✅ Kemitraan Multi-Pihak - Jejaring dengan pemerintah, swasta, dan komunitas', '✅ Legitimasi & Pendanaan - Pengakuan resmi dan potensi dukungan dana berkelanjutan'] }
+            ];
+            
+            const allKegiatan = [...kegiatanDefault, ...kegiatanAdmin];
+            const container = document.querySelector('.grid.highlight-grid');
+            
+            if (container && allKegiatan.length > 0) {
+                container.innerHTML = allKegiatan.map(k => `
+                    <div class="highlight-card">
+                        <div class="highlight-num">${k.icon}</div>
+                        <h3>${k.judul}</h3>
+                        <p><strong>Penanggung Jawab:</strong> ${k.pj}</p>
+                        ${k.foto ? `<img src="${k.foto}" alt="${k.judul}" style="width: 100%; height: auto; border-radius: 10px; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">` : ''}
+                        <ul>
+                            ${k.poin.map(p => `<li>${p}</li>`).join('')}
+                        </ul>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ==================== REFRESH PROGRAM ====================
+        function refreshProgram() {
+            const programAdmin = JSON.parse(localStorage.getItem('program')) || [];
+            
+            const programDefault = [
+                { nama: 'Pawai Isra Mi\'raj', seksi: 'Kerohanian', waktu: '2026' },
+                { nama: 'Pawai Obor Ramadhan', seksi: 'Kerohanian', waktu: 'Ramadhan 2026' },
+                { nama: 'Pesantren Kilat & Santunan Anak Yatim Piatu', seksi: 'Kerohanian', waktu: 'Ramadhan 2026' },
+                { nama: 'Lomba & Pawai Tahun Baru Islam 1 Muharram', seksi: 'Kerohanian', waktu: '2026' },
+                { nama: 'Kajian Rutin Bulanan Pemuda', seksi: 'Kerohanian', waktu: 'Setiap bulan' },
+                { nama: 'Silaturahmi dengan UKKT se-Pademangan Timur', seksi: 'Humas', waktu: 'Januari 2026' },
+                { nama: 'Audiensi dengan PPK Kemayoran', seksi: 'Humas', waktu: '2026' },
+                { nama: 'Audiensi dengan Anggota DPRD', seksi: 'Humas', waktu: '2026' },
+                { nama: 'Audiensi dengan PT Taman Impian Jaya Ancol', seksi: 'Humas', waktu: '2026' },
+                { nama: 'Media Sosial & Publikasi Kegiatan', seksi: 'Humas', waktu: 'Berkelanjutan' },
+                { nama: 'Sosialisasi Beasiswa dengan Universitas dan SMA/SMK', seksi: 'Pendidikan', waktu: '2026' },
+                { nama: 'Pelatihan Keterampilan untuk Perempuan & Remaja Putri', seksi: 'Pendidikan', waktu: '2026' },
+                { nama: 'Workshop Literasi Digital untuk Pemuda', seksi: 'Pendidikan', waktu: '2026' },
+                { nama: 'Kerja Bakti se-Kelurahan Pademangan Timur', seksi: 'Lingkungan', waktu: 'Januari - Desember 2026' },
+                { nama: 'Peremajaan UKKT RW Kelurahan Pademangan Timur', seksi: 'Lingkungan', waktu: 'Januari & Februari 2026' },
+                { nama: 'Hari Peduli Sampah Nasional (kolaborasi Ancol)', seksi: 'Lingkungan', waktu: '2026' },
+                { nama: 'Penghijauan & Tanam Pohon', seksi: 'Lingkungan', waktu: '2026' },
+                { nama: 'Bulan Bakti Karang Taruna ke-67 (bakti sosial)', seksi: 'Kesejahteraan', waktu: 'September & Oktober 2026' },
+                { nama: 'Santunan Anak yatim Piatu, Lansia & Keluarga Tidak Mampu', seksi: 'Kesejahteraan', waktu: '2026' },
+                { nama: 'Pemeriksaan Kesehatan Gratis', seksi: 'Kesejahteraan', waktu: '2026' },
+                { nama: 'Have Fun Badminton, Tenis Meja, Catur & Futsal', seksi: 'Olahraga', waktu: '2026' },
+                { nama: 'Pekan Olahraga Karang Taruna', seksi: 'Olahraga', waktu: '2026' },
+                { nama: 'Fun Run Pemuda', seksi: 'Olahraga', waktu: '2026' },
+                { nama: 'Latihan Kepemimpinan Karang Taruna', seksi: 'Bersama', waktu: '2026' },
+                { nama: 'Rapat Evaluasi & Perencanaan Triwulanan', seksi: 'Bersama', waktu: 'Maret, Juni, September, Desember 2026' }
+            ];
+            
+            const allProgram = [...programDefault, ...programAdmin];
+            
+            const seksiNames = {
+                'Kerohanian': '🙏 Seksi Kerohanian',
+                'Humas': '📢 Seksi Humas',
+                'Pendidikan': '📚 Seksi Pendidikan, Pelatihan, Perempuan & Anak',
+                'Lingkungan': '🌱 Seksi Lingkungan Hidup',
+                'Kesejahteraan': '❤️ Seksi Kesejahteraan Rakyat',
+                'Olahraga': '⚽ Seksi Olahraga',
+                'Bersama': '🚀 Kegiatan Bersama Semua Seksi'
+            };
+            
+            const programBySeksi = {};
+            allProgram.forEach(p => {
+                if (!programBySeksi[p.seksi]) {
+                    programBySeksi[p.seksi] = [];
+                }
+                programBySeksi[p.seksi].push(p);
+            });
+            
+            const accordion = document.getElementById('programKerjaList');
+            if (accordion) {
+                accordion.innerHTML = Object.entries(programBySeksi).map(([seksi, programs]) => `
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(event)">${seksiNames[seksi] || seksi}</div>
+                        <div class="accordion-content">
+                            <ul>
+                                ${programs.map(p => `<li>${p.nama}${p.waktu ? ' - ' + p.waktu : ''}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ==================== REFRESH PENGURUS ====================
+        function refreshPengurus() {
+            const pengurusAdmin = JSON.parse(localStorage.getItem('pengurus')) || [];
+            
+            const pengurusDefault = [
+                { icon: '👑', nama: 'Anwar Fauzi', kategori: 'inti', jabatan: 'Ketua' },
+                { icon: '🌟', nama: 'Agung Arisqi F Putra', kategori: 'inti', jabatan: 'Wakil Ketua' },
+                { icon: '📝', nama: 'Bagus Ardhiawan', kategori: 'inti', jabatan: 'Sekretaris Umum' },
+                { icon: '✨', nama: 'Shita Kartika Zahwa', kategori: 'inti', jabatan: 'Wakil Sekretaris' },
+                { icon: '💰', nama: 'Nur Dian Utami', kategori: 'inti', jabatan: 'Bendahara Umum' },
+                { icon: '🙏', nama: 'Miftahul Chair\nRafli Salim', kategori: 'seksi', jabatan: 'Kerohanian' },
+                { icon: '📢', nama: 'Shafira Syabania\nDimas Algifari\nArdian Ramadhani\nCarudin', kategori: 'seksi', jabatan: 'Humas' },
+                { icon: '📚', nama: 'Siti Fatimah\nReza Aulia\nKyla\nSalwa Salsabillah', kategori: 'seksi', jabatan: 'Pendidikan' },
+                { icon: '🌱', nama: 'M. Ilyas\nAji Febriyanto', kategori: 'seksi', jabatan: 'Lingkungan Hidup' },
+                { icon: '❤️', nama: 'Karyadi Utama\nTiara Noviyanti\nPutri Adelia', kategori: 'seksi', jabatan: 'Kesejahteraan Rakyat' },
+                { icon: '⚽', nama: 'Danu Pangestu\nAngga', kategori: 'seksi', jabatan: 'Olahraga' }
+            ];
+            
+            const allPengurus = [...pengurusDefault, ...pengurusAdmin];
+            
+            const pengurusInti = allPengurus.filter(p => p.kategori === 'inti');
+            const pengurusSeksi = allPengurus.filter(p => p.kategori === 'seksi');
+            
+            const gridInti = document.querySelector('.grid');
+            if (gridInti && pengurusInti.length > 0) {
+                const firstGrid = document.querySelectorAll('.grid')[2];
+                if (firstGrid) {
+                    firstGrid.innerHTML = pengurusInti.map(p => `
+                        <div class="card"><h4>${p.icon} ${p.jabatan}</h4><p>${p.nama}</p></div>
+                    `).join('');
+                }
+            }
+        }
+
+        function refreshKontak() {
+            const kontakAdmin = JSON.parse(localStorage.getItem('kontak')) || [];
+            
+            const kontakDefault = [
+                { kategori: 'narahubung', icon: '👤', label: 'Anwar Fauzi', nilai: '0896-9859-1876' },
+                { kategori: 'narahubung', icon: '👤', label: 'Dimas', nilai: '0877-8185-8105' },
+                { kategori: 'narahubung', icon: '👤', label: 'Ardian Ramadhani', nilai: '0812-9843-7997' },
+                { kategori: 'narahubung', icon: '👤', label: 'Shafira Syabania', nilai: '0881-0124-95882' },
+                { kategori: 'sosmed', icon: '📸', label: 'Instagram', nilai: '@karangtaruna.padtim' },
+                { kategori: 'sosmed', icon: '✉️', label: 'Email', nilai: 'pademangantimurkarangtaruna@gmail.com' },
+                { kategori: 'sosmed', icon: '📺', label: 'YouTube', nilai: '@karangtarunapadtimura' },
+                { kategori: 'sosmed', icon: '🎵', label: 'TikTok', nilai: '@karangtaruna.padtim' }
+            ];
+            
+            const allKontak = [...kontakDefault, ...kontakAdmin];
+            
+            const narahubung = allKontak.filter(k => k.kategori === 'narahubung');
+            const containerNarahubung = document.getElementById('narahubungBox');
+            
+            containerNarahubung.innerHTML = narahubung.map(k => `
+                <div class="kontak-item">
+                    <p><strong>${k.icon} ${k.label}</strong></p>
+                    <p>${k.nilai}</p>
+                </div>
+            `).join('');
+            
+            const sosmed = allKontak.filter(k => k.kategori === 'sosmed');
+            const containerSosmed = document.getElementById('sosmedBox');
+            
+            containerSosmed.innerHTML = sosmed.map(k => {
+                let href = '';
+                let displayText = k.nilai;
+                
+                const label = k.label.toLowerCase();
+                let nilai = k.nilai.trim().toLowerCase();
+                
+                // Hapus @ dari awal kalau ada
+                if (nilai.startsWith('@')) {
+                    nilai = nilai.substring(1);
+                }
+                
+                if (label.includes('email')) {
+                    href = `mailto:${k.nilai.trim()}`;
+                } else if (label.includes('instagram')) {
+                    href = `https://www.instagram.com/${nilai}/`;
+                } else if (label.includes('youtube')) {
+                    href = `https://www.youtube.com/@${nilai}`;
+                } else if (label.includes('tiktok')) {
+                    href = `https://www.tiktok.com/@${nilai}`;
+                } else if (label.includes('twitter') || label.includes('x')) {
+                    href = `https://twitter.com/${nilai}`;
+                } else if (label.includes('facebook')) {
+                    href = `https://www.facebook.com/${nilai}`;
+                } else if (label.includes('linkedin')) {
+                    href = `https://www.linkedin.com/in/${nilai}`;
+                } else if (label.includes('whatsapp') || label.includes('wa')) {
+                    const phoneNumber = k.nilai.replace(/[^0-9+]/g, '');
+                    href = `https://wa.me/${phoneNumber}`;
+                }
+                
+                const linkHtml = href 
+                    ? `<a href="${href}" target="_blank" style="color: white; text-decoration: none; font-weight: bold;">${displayText}</a>`
+                    : displayText;
+                
+                return `
+                    <div class="kontak-item">
+                        <p><strong>${k.icon} ${k.label}:</strong> ${linkHtml}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshWebsiteContent();
+        });
+
+        // Smooth scroll untuk nav links
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if(target) target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        document.querySelectorAll('.accordion-header').forEach(h => {
-            h.addEventListener('click', function() {
-                const item = this.parentElement;
-                const active = item.classList.contains('active');
-                document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
-                if(!active) item.classList.add('active');
             });
         });
     </script>
