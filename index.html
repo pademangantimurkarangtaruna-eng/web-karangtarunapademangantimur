@@ -9,7 +9,6 @@
         body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* Animations */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
@@ -24,15 +23,15 @@
         @keyframes dance { 0%, 100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-10px) rotate(-5deg); } 75% { transform: translateY(-5px) rotate(5deg); } }
         @keyframes wobble-small { 0%, 100% { transform: rotateZ(0deg); } 25% { transform: rotateZ(3deg); } 50% { transform: rotateZ(-3deg); } 75% { transform: rotateZ(2deg); } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-        
-        /* Decorative Elements */
+        @keyframes ring { 0%, 100% { transform: rotate(0deg); } 10% { transform: rotate(-10deg); } 20% { transform: rotate(10deg); } 30% { transform: rotate(-10deg); } 40% { transform: rotate(10deg); } 50% { transform: rotate(0deg); } }
+        @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); } 70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
+        @keyframes progressBar { from { width: 0%; } to { width: 100%; } }
+
         .decoration { position: absolute; opacity: 0.6; animation: twinkle 3s ease-in-out infinite; }
         .star { font-size: 1.5rem; animation: twinkle 2.5s ease-in-out infinite; }
         .star.spin { animation: spin 10s linear infinite; }
         .badge { display: inline-block; background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; margin-left: 8px; animation: bounce 2s ease-in-out infinite; }
         .fun-emoji { font-size: 1.3rem; display: inline-block; animation: dance 3s ease-in-out infinite; margin: 0 5px; }
-        
-        /* Floating Decorations for Sections */
         .floating-deco { position: absolute; opacity: 0.4; pointer-events: none; }
         .floating-deco.deco1 { font-size: 2rem; top: 5%; left: 5%; animation: twinkle 4s ease-in-out infinite; }
         .floating-deco.deco2 { font-size: 1.8rem; top: 10%; right: 8%; animation: wobble-small 3s ease-in-out infinite; }
@@ -40,27 +39,28 @@
         .floating-deco.deco4 { font-size: 1.6rem; bottom: 15%; right: 5%; animation: twinkle 3s ease-in-out infinite; }
         .floating-deco.deco5 { font-size: 2rem; top: 30%; left: 2%; animation: spin 8s linear infinite; }
 
-        /* Header */
         header { background: linear-gradient(135deg, #1e3c72, #2a5298, #3b82f6); background-size: 200% 200%; animation: gradient 10s ease infinite; color: white; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(59,130,246,0.3); }
-        .navbar { padding: 1rem 0; }
-        .navbar .container { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
-        .logo { display: flex; align-items: center; gap: 1rem; }
-        .logo h2 { color: white; font-size: 1rem; flex-shrink: 0; }
-        .logo img { height: 50px; width: auto; transition: 0.3s; }
-        .logo img:hover { transform: scale(1.1); }
-        .nav-menu { display: flex; list-style: none; gap: 2rem; flex-shrink: 0; }
-        .nav-menu a { color: white; text-decoration: none; padding: 8px 16px; border-radius: 20px; transition: 0.3s; font-size: 0.95rem; }
-        .nav-menu a:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
+        .navbar { padding: 0; }
+        .navbar .container { display: flex; flex-direction: column; align-items: center; padding: 0 24px; gap: 0; }
+        .navbar-top { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 10px 0 7px; width: 100%; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo h2 { color: white; font-size: 1rem; font-weight: 700; white-space: nowrap; }
+        .logo img { height: 40px; width: auto; transition: 0.3s; flex-shrink: 0; }
+        .logo img:hover { transform: scale(1.08); }
+        .navbar-bottom { width: 100%; display: flex; justify-content: center; border-top: 1px solid rgba(255,255,255,0.15); }
+        .nav-menu { display: flex; list-style: none; gap: 0; }
+        .nav-menu a { color: rgba(255,255,255,0.92); text-decoration: none; padding: 8px 16px; transition: 0.2s; font-size: 0.88rem; display: block; white-space: nowrap; }
+        .nav-menu a:hover { background: rgba(255,255,255,0.18); color: white; }
+        @media (max-width: 860px) { .logo h2 { font-size: 0.88rem; } .nav-menu a { padding: 7px 11px; font-size: 0.8rem; } }
+        @media (max-width: 600px) { .navbar-bottom { overflow-x: auto; } .nav-menu a { padding: 7px 9px; font-size: 0.76rem; } }
 
-        /* Hero */
-        .hero { background: linear-gradient(rgba(30,60,114,0.6), rgba(59,130,246,0.6)), url('hero-bg.jpg'); background-size: cover; background-position: center; color: white; padding: 180px 20px 100px; text-align: center; min-height: 600px; }
+        .hero { background: linear-gradient(rgba(30,60,114,0.6), rgba(59,130,246,0.6)), url('hero-bg.jpg'); background-size: cover; background-position: center; color: white; padding: 200px 20px 100px; text-align: center; min-height: 600px; }
         .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; animation: fadeIn 1s; }
         .hero h2 { font-size: 3rem; margin-bottom: 1rem; animation: fadeIn 1s 0.2s both; }
         .hero p { font-size: 1.3rem; margin-bottom: 2rem; animation: fadeIn 1s 0.4s both; }
         .btn { display: inline-block; background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; transition: 0.3s; animation: fadeIn 1s 0.6s both, float 3s ease-in-out infinite, glow 2s ease-in-out infinite; box-shadow: 0 10px 30px rgba(59,130,246,0.4); }
         .btn:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(59,130,246,0.6); }
 
-        /* Sections */
         section { padding: 80px 20px; }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #1e3c72; position: relative; padding-bottom: 15px; }
         .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 100px; height: 4px; background: linear-gradient(90deg, #3b82f6, #60a5fa); border-radius: 2px; }
@@ -70,27 +70,21 @@
         .bg-blue2 { background: linear-gradient(135deg, #dbeafe, #93c5fd); }
         .bg-dark { background: linear-gradient(135deg, #1e3c72, #2a5298, #3b82f6); color: white; }
 
-        /* Profile */
         .profile-content { max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; padding: 30px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(59,130,246,0.2); }
-
         #profile { position: relative; overflow: hidden; }
 
-        /* Boxes */
         .box { background: white; padding: 40px; margin-bottom: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(59,130,246,0.15); border-left: 5px solid #3b82f6; transition: 0.3s; animation: fadeIn 0.8s ease-out; }
-        .box:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(59,130,246,0.3); animation: wobble 0.5s ease-in-out; }
+        .box:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(59,130,246,0.3); }
         .box h3 { color: #1e3c72; font-size: 2rem; margin-bottom: 1.5rem; }
         .box ol, .box ul { padding-left: 20px; }
         .box li { margin-bottom: 15px; font-size: 1.05rem; }
 
-        /* Grid */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .grid-item { background: linear-gradient(135deg, #eff6ff, #dbeafe); padding: 25px; border-radius: 15px; border-left: 4px solid #3b82f6; transition: 0.3s; }
         .grid-item:hover { transform: translateX(10px) scale(1.05); background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; }
 
-        /* Highlight Grid - Full Width */
         .grid.highlight-grid { grid-template-columns: 1fr; }
 
-        /* Cards */
         .card { background: linear-gradient(135deg, white, #eff6ff); padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(59,130,246,0.2); transition: 0.3s; animation: pop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
         .card:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 20px 50px rgba(59,130,246,0.4); }
         .card h4 { color: #3b82f6; font-size: 1.3rem; margin-bottom: 10px; }
@@ -100,7 +94,6 @@
         .card2:hover { transform: translateY(-10px); }
         .card2 h4 { color: #3b82f6; font-size: 1.2rem; margin-bottom: 15px; }
 
-        /* Highlight */
         .highlight-card { background: linear-gradient(135deg, white, #eff6ff); padding: 40px 30px 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(59,130,246,0.15); position: relative; transition: 0.3s; animation: slideInLeft 0.8s ease-out; }
         .highlight-card:nth-child(even) { animation: slideInRight 0.8s ease-out; }
         .highlight-card:hover { transform: translateY(-15px); box-shadow: 0 25px 60px rgba(59,130,246,0.3); }
@@ -109,26 +102,20 @@
         .highlight-card ul { padding-left: 20px; }
         .highlight-card li { margin-bottom: 12px; }
 
-        /* Accordion */
         .accordion { max-width: 900px; margin: 0 auto; }
         .accordion-item { background: white; margin-bottom: 15px; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(59,130,246,0.15); animation: pop 0.6s ease-out; }
         .accordion-header { background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; padding: 20px 25px; cursor: pointer; font-weight: bold; font-size: 1.1rem; position: relative; transition: 0.3s; }
         .accordion-header::after { content: '▼'; position: absolute; right: 25px; transition: 0.3s; }
-        .accordion-item.active .accordion-header::after { transform: rotate(180deg); animation: bounce 0.5s ease-out; }
+        .accordion-item.active .accordion-header::after { transform: rotate(180deg); }
         .accordion-header:hover { padding-left: 30px; background: linear-gradient(135deg, #60a5fa, #3b82f6); }
         .accordion-content { padding: 25px; display: none; background: linear-gradient(135deg, #eff6ff, white); }
         .accordion-item.active .accordion-content { display: block; }
         .accordion-content ul { padding-left: 20px; }
         .accordion-content li { margin-bottom: 12px; }
 
-        /* Kontak */
         .kontak-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 35px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); transition: 0.3s; }
         .kontak-box:hover { transform: translateY(-10px); background: rgba(255,255,255,0.15); }
         .kontak-box h3 { color: white; font-size: 1.8rem; margin-bottom: 20px; border-bottom: 3px solid rgba(255,255,255,0.3); padding-bottom: 10px; display: flex; align-items: center; gap: 12px; }
-        
-        @keyframes ring { 0%, 100% { transform: rotate(0deg); } 10% { transform: rotate(-10deg); } 20% { transform: rotate(10deg); } 30% { transform: rotate(-10deg); } 40% { transform: rotate(10deg); } 50% { transform: rotate(0deg); } }
-        @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); } 70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
-        
         .phone-icon { font-size: 1.5rem; display: inline-block; animation: ring 1.5s infinite; }
         .phone-icon.pulse { animation: pulse-ring 1.5s infinite; }
         .kontak-item { padding: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.1); border-radius: 10px; transition: 0.3s; word-wrap: break-word; overflow-wrap: break-word; }
@@ -138,116 +125,225 @@
 
         footer { background: #1e3c72; color: white; text-align: center; padding: 30px 20px; position: relative; }
 
-        /* Admin Button - Hidden by default */
-        .admin-access { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: linear-gradient(135deg, #3b82f6, #60a5fa); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 20px rgba(59,130,246,0.5); transition: 0.3s; z-index: 9999; opacity: 0; font-size: 1.5rem; animation: pulse 2s ease-in-out infinite; pointer-events: none; }
-        .admin-access:hover { transform: scale(1.15); box-shadow: 0 8px 25px rgba(59,130,246,0.7); }
-        .admin-access.show { opacity: 1; pointer-events: auto; }
+        /* ===================== ADMIN PANEL ===================== */
+        #adminOverlay { display: none; position: fixed; inset: 0; z-index: 99999; background: #f1f5f9; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+        #adminOverlay.active { display: flex; flex-direction: column; }
+        #adminLogin { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .admin-login-box { background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 48px 40px; width: 380px; text-align: center; box-shadow: 0 8px 40px rgba(59,130,246,0.12); }
+        .admin-login-box .lock-icon { font-size: 3rem; margin-bottom: 1rem; display: block; animation: pulse 2s ease-in-out infinite; }
+        .admin-login-box h2 { color: #1e3c72; font-size: 1.2rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
+        .admin-login-box p { color: #94a3b8; font-size: 0.8rem; margin-bottom: 32px; letter-spacing: 1px; }
+        .admin-input { width: 100%; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; color: #1e293b; padding: 12px 16px; font-size: 1rem; font-family: 'Segoe UI', sans-serif; letter-spacing: 3px; text-align: center; margin-bottom: 16px; outline: none; transition: 0.3s; }
+        .admin-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+        .admin-btn-login { width: 100%; background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; border: none; border-radius: 8px; padding: 13px; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: 0.3s; font-family: 'Segoe UI', sans-serif; }
+        .admin-btn-login:hover { background: linear-gradient(135deg, #2563eb, #60a5fa); transform: translateY(-2px); }
+        .admin-login-error { color: #ef4444; font-size: 0.8rem; margin-top: 12px; display: none; }
+        .admin-close-btn { position: absolute; top: 20px; right: 24px; background: white; border: 1px solid #e2e8f0; color: #94a3b8; width: 36px; height: 36px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; transition: 0.3s; }
+        .admin-close-btn:hover { border-color: #fca5a5; color: #ef4444; background: #fff5f5; }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .hero h2 { font-size: 2.5rem; }
-        }
+        #adminDashboard { display: none; flex-direction: column; height: 100%; }
+        #adminDashboard.active { display: flex; }
+        .admin-topbar { background: white; border-bottom: 1px solid #e2e8f0; box-shadow: 0 1px 4px rgba(0,0,0,0.05); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+        .admin-topbar-left { display: flex; align-items: center; gap: 12px; }
+        .admin-topbar-left span { color: #1e3c72; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; }
+        .admin-status { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: #16a34a; background: #f0fdf4; padding: 3px 10px; border-radius: 20px; border: 1px solid #bbf7d0; }
+        .admin-status::before { content: '●'; }
+        .admin-topbar-right { display: flex; gap: 8px; }
+        .admin-btn-sm { background: #f8fafc; border: 1px solid #e2e8f0; color: #475569; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; transition: 0.2s; font-family: 'Segoe UI', sans-serif; }
+        .admin-btn-sm:hover { background: #f1f5f9; color: #1e293b; border-color: #cbd5e1; }
+        .admin-btn-sm:disabled { opacity: 0.5; cursor: not-allowed; }
+        .admin-btn-sm.danger:hover { background: #fff5f5; border-color: #fca5a5; color: #ef4444; }
+        .admin-btn-sm.save { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; font-weight: 600; }
+        .admin-btn-sm.save:hover { background: #dbeafe; color: #1e40af; }
+        .admin-body { display: flex; flex: 1; overflow: hidden; }
+        .admin-sidebar { width: 240px; background: white; border-right: 1px solid #e2e8f0; padding: 20px 0; flex-shrink: 0; overflow-y: auto; }
+        .admin-sidebar-label { color: #94a3b8; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; padding: 0 20px 8px; font-weight: 600; }
+        .admin-nav-item { display: flex; align-items: center; gap: 10px; padding: 11px 20px; color: #64748b; font-size: 0.85rem; cursor: pointer; transition: 0.15s; border-left: 3px solid transparent; }
+        .admin-nav-item:hover { background: #f8fafc; color: #1e293b; }
+        .admin-nav-item.active { background: #eff6ff; color: #1d4ed8; border-left-color: #3b82f6; font-weight: 600; }
+        .admin-nav-sep { height: 1px; background: #f1f5f9; margin: 10px 16px; }
+        .admin-content { flex: 1; overflow-y: auto; padding: 28px 32px; background: #f8fafc; }
+        .admin-panel { display: none; }
+        .admin-panel.active { display: block; }
+        .admin-panel-title { color: #1e293b; font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+        .admin-panel-sub { color: #94a3b8; font-size: 0.82rem; margin-bottom: 24px; }
+        .admin-field-group { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 22px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+        .admin-field-group h4 { color: #1e3c72; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(59,130,246,0.15); }
+        .admin-field { margin-bottom: 16px; }
+        .admin-label { display: block; color: #64748b; font-size: 0.73rem; letter-spacing: 1px; font-weight: 600; margin-bottom: 5px; text-transform: uppercase; }
+        .admin-text-input, .admin-textarea { width: 100%; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; color: #1e293b; padding: 9px 13px; font-size: 0.9rem; font-family: 'Segoe UI', sans-serif; outline: none; transition: 0.3s; resize: vertical; }
+        .admin-text-input:focus, .admin-textarea:focus { border-color: #3b82f6; background: white; box-shadow: 0 0 0 3px rgba(59,130,246,0.08); }
+        .admin-list-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+        .admin-list-item input { flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; color: #1e293b; padding: 8px 12px; font-size: 0.87rem; font-family: 'Segoe UI', sans-serif; outline: none; transition: 0.3s; }
+        .admin-list-item input:focus { border-color: #3b82f6; background: white; }
+        .admin-list-del { background: #fff5f5; border: 1px solid #fecaca; color: #ef4444; width: 32px; height: 32px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; flex-shrink: 0; transition: 0.2s; }
+        .admin-list-del:hover { background: #fee2e2; }
+        .admin-list-add { background: #f0fdf4; border: 1px dashed #86efac; color: #16a34a; width: 100%; padding: 8px; border-radius: 6px; cursor: pointer; font-size: 0.82rem; margin-top: 6px; transition: 0.2s; letter-spacing: 1px; }
+        .admin-list-add:hover { background: #dcfce7; }
+        .admin-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-bottom: 12px; }
+        .admin-card-edit { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; position: relative; }
+        .admin-card-edit-del { position: absolute; top: 8px; right: 8px; background: #fff5f5; border: 1px solid #fecaca; color: #ef4444; width: 24px; height: 24px; border-radius: 5px; cursor: pointer; font-size: 0.75rem; transition: 0.2s; }
+        .admin-card-edit-del:hover { background: #fee2e2; }
+        .admin-card-edit input { width: 100%; background: white; border: none; border-bottom: 1px solid #e2e8f0; color: #1e293b; padding: 5px 0; font-size: 0.85rem; font-family: 'Segoe UI', sans-serif; outline: none; margin-bottom: 8px; }
+        .admin-card-edit input:focus { border-bottom-color: #3b82f6; }
+        .admin-accordion-group { background: white; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+        .admin-accordion-group-header { background: #eff6ff; padding: 11px 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #dbeafe; }
+        .admin-accordion-group-header input { flex: 1; background: transparent; border: none; border-bottom: 1px solid #bfdbfe; color: #1d4ed8; padding: 4px 0; font-size: 0.9rem; font-family: 'Segoe UI', sans-serif; outline: none; font-weight: 600; }
+        .admin-accordion-group-header input:focus { border-bottom-color: #3b82f6; }
+        .admin-accordion-group-body { padding: 12px 16px; }
+        .admin-contact-person { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-bottom: 10px; position: relative; }
+        .admin-contact-person input { width: 100%; background: white; border: 1px solid #e2e8f0; border-radius: 6px; color: #1e293b; padding: 7px 10px; font-size: 0.85rem; font-family: 'Segoe UI', sans-serif; outline: none; margin-bottom: 8px; }
+        .admin-contact-person input:focus { border-color: #3b82f6; }
+        .admin-highlight-item { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; margin-bottom: 14px; position: relative; }
 
-        @media (max-width: 768px) {
-            .container { padding: 0 15px; }
-            .nav-menu { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
-            .nav-menu a { padding: 6px 12px; font-size: 0.9rem; }
-            .logo h2 { font-size: 1.2rem; }
-            .hero { padding: 120px 15px 60px; min-height: 400px; }
-            .hero h1 { font-size: 1.8rem; }
-            .hero h2 { font-size: 1.8rem; }
-            .hero p { font-size: 1rem; }
-            section { padding: 50px 15px; }
-            .section-title { font-size: 2rem; margin-bottom: 2rem; }
-            .profile-content { font-size: 1rem; padding: 20px; }
-            .card, .card2 { padding: 20px; }
-            .card h4, .card2 h4 { font-size: 1.1rem; }
-            .box { padding: 25px; margin-bottom: 20px; }
-            .box h3 { font-size: 1.5rem; margin-bottom: 1rem; }
-            .box li { font-size: 1rem; margin-bottom: 10px; }
-            .grid { gap: 15px; }
-            .grid-item { padding: 15px; }
-            .highlight-card { padding: 25px 20px; }
-            .highlight-num { font-size: 1.8rem; width: 50px; height: 50px; }
-            .highlight-card h3 { font-size: 1.3rem; }
-            .highlight-card ul { padding-left: 15px; }
-            .accordion-header { padding: 12px 15px; font-size: 1rem; }
-            .accordion-content { padding: 15px; }
-            .kontak-box { padding: 20px; }
-            .kontak-box h3 { font-size: 1.3rem; }
-            .floating-deco { font-size: 1.5rem !important; }
-            .badge { padding: 4px 8px; font-size: 0.8rem; }
-            .btn { padding: 12px 30px; font-size: 1rem; }
+        /* ===== UPLOAD ZONE - PERBAIKAN UTAMA ===== */
+        .photo-upload-zone {
+            border: 2px dashed #bfdbfe;
+            border-radius: 12px;
+            padding: 28px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #f8fafc;
+            position: relative;
+            overflow: hidden;
         }
+        .photo-upload-zone:hover { border-color: #3b82f6; background: #eff6ff; }
+        .photo-upload-zone.drag-over { border-color: #3b82f6; background: #dbeafe; border-style: solid; }
+        .photo-upload-zone input[type=file] {
+            position: absolute; inset: 0; opacity: 0; cursor: pointer;
+            width: 100%; height: 100%; z-index: 2;
+        }
+        .photo-upload-zone .upload-icon { font-size: 2.5rem; margin-bottom: 8px; display: block; }
+        .photo-upload-zone p { color: #64748b; font-size: 0.9rem; font-weight: 500; }
+        .photo-upload-zone .upload-hint { color: #94a3b8; font-size: 0.75rem; margin-top: 6px; }
 
-        @media (max-width: 480px) {
-            .container { padding: 0 20px; }
-            header { padding: 0.8rem 0; }
-            .navbar .container { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
-            .nav-menu { flex-direction: row; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
-            .nav-menu a { padding: 6px 10px; font-size: 0.8rem; }
-            .logo { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
-            .logo img { height: 35px !important; }
-            .logo h2 { font-size: 1rem; }
-            .hero { padding: 110px 20px 60px; min-height: 380px; }
-            .hero img { height: 70px !important; margin-bottom: 1rem !important; }
-            .hero h1 { font-size: 1.6rem; margin-bottom: 0.8rem; }
-            .hero h2 { font-size: 1.8rem; margin-bottom: 1rem; }
-            .hero p { font-size: 0.95rem; margin-bottom: 1.5rem; }
-            section { padding: 50px 20px; }
-            .section-title { font-size: 1.6rem; margin-bottom: 2rem; padding-bottom: 12px; }
-            .section-title::after { width: 80px; height: 3px; }
-            .profile-content { font-size: 0.95rem; padding: 20px; line-height: 1.6; }
-            .profile-content p { line-height: 1.5; margin-bottom: 10px; }
-            .profile-content img { height: 60px !important; }
-            footer img { height: 45px !important; }
-            .card, .card2 { padding: 18px; margin-bottom: 14px; }
-            .card h4, .card2 h4 { font-size: 1rem; margin-bottom: 8px; }
-            .card p, .card2 p { font-size: 0.9rem; }
-            .box { padding: 20px; margin-bottom: 18px; border-left-width: 4px; }
-            .box h3 { font-size: 1.3rem; margin-bottom: 1rem; }
-            .box ol, .box ul { padding-left: 18px; margin-top: 0.8rem; }
-            .box li { font-size: 0.9rem; margin-bottom: 8px; line-height: 1.4; }
-            .grid { gap: 14px; }
-            .grid-item { padding: 16px; font-size: 0.9rem; line-height: 1.5; }
-            .highlight-card { padding: 18px; margin-bottom: 16px; animation: none; }
-            .highlight-card:nth-child(even) { animation: none; }
-            .highlight-num { font-size: 1.5rem; width: 45px; height: 45px; line-height: 45px; }
-            .highlight-card h3 { font-size: 1.1rem; margin-bottom: 0.8rem; }
-            .highlight-card p { font-size: 0.85rem; margin-bottom: 0.8rem; }
-            .highlight-card img { margin: 10px 0 !important; }
-            .highlight-card ul { padding-left: 14px; }
-            .highlight-card li { font-size: 0.85rem; margin-bottom: 6px; line-height: 1.4; }
-            .accordion-header { padding: 14px 18px; font-size: 0.95rem; margin-bottom: 8px; }
-            .accordion-content { padding: 16px 18px; }
-            .accordion-content ul { padding-left: 14px; }
-            .accordion-content li { font-size: 0.85rem; margin-bottom: 6px; line-height: 1.4; }
-            .kontak-box { padding: 18px; margin-bottom: 18px; }
-            .kontak-box h3 { font-size: 1.1rem; margin-bottom: 14px; flex-wrap: wrap; }
-            .kontak-item { padding: 12px; margin-bottom: 12px; }
-            .kontak-item p { font-size: 0.85rem; margin-bottom: 4px; }
-            footer { padding: 20px 12px; }
-            footer p { font-size: 0.9rem; line-height: 1.4; }
-            .floating-deco { display: none !important; }
-            .badge { padding: 4px 7px; font-size: 0.75rem; margin-left: 4px; animation: none; }
-            .fun-emoji { font-size: 1.1rem; animation: none; }
-            .phone-icon { font-size: 1.3rem; }
-            .btn { padding: 10px 20px; font-size: 0.85rem; animation: fadeIn 1s 0.6s both !important; }
-            .btn:hover { transform: translateY(-2px); }
+        /* Progress bar */
+        .upload-progress-wrap {
+            margin-top: 12px;
+            display: none;
         }
+        .upload-progress-wrap.active { display: block; }
+        .upload-progress-label { font-size: 0.8rem; color: #1d4ed8; font-weight: 600; margin-bottom: 6px; }
+        .upload-progress-bar-bg { background: #dbeafe; border-radius: 10px; height: 8px; overflow: hidden; }
+        .upload-progress-bar { height: 100%; background: linear-gradient(90deg, #3b82f6, #60a5fa); border-radius: 10px; width: 0%; transition: width 0.3s; }
+
+        /* Preview foto */
+        .photo-preview-wrap { position: relative; display: inline-block; margin: 8px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+        .photo-preview-wrap img { display: block; width: 120px; height: 85px; object-fit: cover; border-radius: 8px; }
+        .photo-preview-wrap.hero-preview img { width: 200px; height: 110px; }
+        .photo-preview-wrap .photo-del-btn { position: absolute; top: 4px; right: 4px; background: rgba(15,15,15,0.75); border: 1px solid rgba(248,113,113,0.5); color: #f87171; width: 22px; height: 22px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; line-height: 1; transition: 0.2s; }
+        .photo-preview-wrap .photo-del-btn:hover { background: rgba(248,113,113,0.3); }
+        .photo-preview-wrap .photo-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); color: rgba(255,255,255,0.85); font-size: 0.68rem; padding: 3px 5px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .photo-grid-preview { display: flex; flex-wrap: wrap; gap: 0; margin-top: 12px; }
+
+        /* Pengurus photos */
+        .pengurus-photo-thumb { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; border: 2px solid rgba(59,130,246,0.3); flex-shrink: 0; cursor: pointer; }
+        .pengurus-photo-placeholder { width: 50px; height: 50px; border-radius: 8px; background: #eff6ff; border: 2px dashed #bfdbfe; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; cursor: pointer; position: relative; }
+        .pengurus-photo-placeholder input[type=file] { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+
+        /* Toast */
+        #adminToast { position: fixed; bottom: 32px; right: 32px; background: #f0fdf4; border: 1px solid #86efac; color: #16a34a; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.1); padding: 12px 20px; border-radius: 10px; font-size: 0.85rem; z-index: 999999; opacity: 0; transform: translateY(10px); transition: 0.3s; pointer-events: none; }
+        #adminToast.show { opacity: 1; transform: translateY(0); }
+        #adminToast.error { background: #fff5f5; border-color: #fca5a5; color: #ef4444; }
+
+        /* Lightbox */
+        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 99998; align-items: center; justify-content: center; flex-direction: column; gap: 12px; }
+        #lightbox.active { display: flex; }
+        #lightbox img { max-width: 90vw; max-height: 80vh; border-radius: 12px; object-fit: contain; box-shadow: 0 0 60px rgba(59,130,246,0.3); }
+        #lightbox .lb-caption { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+        #lightbox .lb-close { position: fixed; top: 20px; right: 24px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: white; width: 40px; height: 40px; border-radius: 10px; cursor: pointer; font-size: 1.2rem; }
+        #lightbox .lb-nav { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: white; width: 44px; height: 44px; border-radius: 10px; cursor: pointer; font-size: 1.3rem; }
+        #lightbox .lb-prev { left: 16px; }
+        #lightbox .lb-next { right: 16px; }
+
+        /* Pengurus with photo */
+        .card.has-photo { padding: 0; overflow: hidden; }
+        .card.has-photo .card-photo { width: 100%; height: 140px; object-fit: cover; }
+        .card.has-photo .card-info { padding: 16px 20px; }
+        .card.has-photo h4 { margin-bottom: 4px; }
+
+        /* Info box */
+        .info-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; font-size: 0.82rem; color: #1d4ed8; line-height: 1.7; }
+        .info-box strong { display: block; margin-bottom: 4px; font-size: 0.85rem; }
+        .warn-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; font-size: 0.82rem; color: #92400e; line-height: 1.7; }
+
+        @media (max-width: 768px) { .admin-sidebar { width: 190px; } .admin-content { padding: 18px; } }
+        @media (max-width: 480px) { .admin-body { flex-direction: column; } .admin-sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid #e2e8f0; padding: 8px 0; display: flex; overflow-x: auto; } .admin-nav-item { padding: 8px 14px; white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; } .admin-nav-item.active { border-left: none; border-bottom-color: #3b82f6; background: #eff6ff; } .admin-content { padding: 16px; } .admin-login-box { width: 90%; padding: 32px 24px; } }
     </style>
 </head>
 <body>
-    <!-- Admin Access Button (Hidden, Activated by Triple-Click atau Ctrl+Alt+A) -->
-    <div class="admin-access" id="adminAccessBtn" onclick="alert('Fitur admin panel tersedia di versi lengkap')">🔐</div>
 
-    <header>
-        <nav class="navbar">
-            <div class="container">
+<!-- ADMIN OVERLAY -->
+<div id="adminOverlay">
+    <button class="admin-close-btn" onclick="closeAdmin()">✕</button>
+    <div id="adminLogin">
+        <div class="admin-login-box">
+            <span class="lock-icon">🔒</span>
+            <h2>Admin Panel</h2>
+            <p>KARANG TARUNA PADEMANGAN TIMUR</p>
+            <input type="password" class="admin-input" id="adminPassInput" placeholder="••••••••" onkeydown="if(event.key==='Enter') checkAdminPass()">
+            <button class="admin-btn-login" onclick="checkAdminPass()">MASUK</button>
+            <div class="admin-login-error" id="adminLoginError">❌ Password salah. Coba lagi.</div>
+        </div>
+    </div>
+    <div id="adminDashboard">
+        <div class="admin-topbar">
+            <div class="admin-topbar-left">
+                <span>🛠 ADMIN PANEL</span>
+                <div class="admin-status">AKTIF</div>
+                <div style="font-size:0.72rem;color:#94a3b8;background:#f8fafc;border:1px solid #e2e8f0;padding:3px 10px;border-radius:20px;" title="TUTUP = kembali ke website, tetap login. LOGOUT = keluar & hapus sesi login.">💡 TUTUP = tetap login</div>
+            </div>
+            <div class="admin-topbar-right">
+                <button class="admin-btn-sm save" onclick="saveAllData()">💾 SIMPAN SEMUA</button>
+                <button class="admin-btn-sm" onclick="resetToDefault()">↺ RESET DEFAULT</button>
+                <button class="admin-btn-sm" onclick="closeAdmin()" title="Tutup panel, tetap login">✕ TUTUP</button>
+                <button class="admin-btn-sm danger" onclick="logoutAdmin()" title="Logout - perlu password lagi saat buka admin">🚪 LOGOUT</button>
+            </div>
+        </div>
+        <div class="admin-body">
+            <div class="admin-sidebar">
+                <div class="admin-sidebar-label">NAVIGASI</div>
+                <div class="admin-nav-item active" onclick="switchPanel('hero')" data-panel="hero">🏠 Beranda / Hero</div>
+                <div class="admin-nav-item" onclick="switchPanel('profile')" data-panel="profile">👤 Profil</div>
+                <div class="admin-nav-item" onclick="switchPanel('visi')" data-panel="visi">🎯 Visi & Misi</div>
+                <div class="admin-nav-item" onclick="switchPanel('peran')" data-panel="peran">⚙️ Peran Organisasi</div>
+                <div class="admin-nav-sep"></div>
+                <div class="admin-sidebar-label">STRUKTUR</div>
+                <div class="admin-nav-item" onclick="switchPanel('pengurus')" data-panel="pengurus">👑 Pengurus Inti</div>
+                <div class="admin-nav-item" onclick="switchPanel('seksi')" data-panel="seksi">👥 Seksi-Seksi</div>
+                <div class="admin-nav-sep"></div>
+                <div class="admin-sidebar-label">KEGIATAN</div>
+                <div class="admin-nav-item" onclick="switchPanel('highlight')" data-panel="highlight">⭐ Highlight Kegiatan</div>
+                <div class="admin-nav-item" onclick="switchPanel('program')" data-panel="program">📋 Program Kerja</div>
+                <div class="admin-nav-sep"></div>
+                <div class="admin-sidebar-label">FOTO & MEDIA</div>
+                <div class="admin-nav-item" onclick="switchPanel('foto-logo')" data-panel="foto-logo">🏷️ Logo Organisasi</div>
+                <div class="admin-nav-item" onclick="switchPanel('foto-bg')" data-panel="foto-bg">🖼️ Foto Background</div>
+                <div class="admin-nav-item" onclick="switchPanel('foto-pengurus')" data-panel="foto-pengurus">👤 Foto Pengurus</div>
+                <div class="admin-nav-sep"></div>
+                <div class="admin-nav-item" onclick="switchPanel('kontak')" data-panel="kontak">📞 Kontak</div>
+                <div class="admin-nav-item" onclick="switchPanel('footer')" data-panel="footer">🔻 Footer</div>
+                <div class="admin-nav-sep"></div>
+                <div class="admin-nav-item" onclick="switchPanel('password')" data-panel="password">🔑 Ubah Password</div>
+            </div>
+            <div class="admin-content" id="adminContent"></div>
+        </div>
+    </div>
+</div>
+<div id="adminToast"></div>
+
+<!-- MAIN WEBSITE -->
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-top">
                 <div class="logo">
-                    <img src="logo-uta.png" alt="Logo UTA'45 Jakarta">
-                    <h2>Karang Taruna Kelurahan Pademangan Timur</h2>
+                    <img src="logo-uta.png" alt="Logo UTA'45 Jakarta" class="site-logo" onerror="this.style.display='none'">
+                    <h2 id="site-org-name">Karang Taruna Kelurahan Pademangan Timur</h2>
                 </div>
+            </div>
+            <div class="navbar-bottom">
                 <ul class="nav-menu">
                     <li><a href="#home">Beranda</a></li>
                     <li><a href="#profile">Profil</a></li>
@@ -257,352 +353,1081 @@
                     <li><a href="#kontak">Kontak</a></li>
                 </ul>
             </div>
-        </nav>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h2>Karang Taruna Kelurahan Pademangan Timur</h2>
-            <p>Wadah Pengembangan dan Pemberdayaan Pemuda</p>
-            <a href="#visi-misi" class="btn">Lihat Lebih Lanjut</a>
         </div>
-    </section>
+    </nav>
+</header>
 
-    <section id="profile" class="bg-blue">
-        <div class="container">
-            <h2 class="section-title">Profil Karang Taruna</h2>
-            <div class="profile-content">
-                <p>Karang Taruna Kelurahan Pademangan Timur adalah organisasi kepemudaan yang berkomitmen untuk mengembangkan potensi pemuda dan berkontribusi bagi kesejahteraan masyarakat. Kami hadir sebagai motor penggerak kegiatan sosial, ekonomi kreatif, dan pemberdayaan masyarakat di wilayah Pademangan Timur.</p>
-                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #3b82f6;">
-                    <h3 style="color: #1e3c72; font-size: 1.3rem; margin-bottom: 1rem;">🤝 Dukungan Institusi Pendidikan</h3>
-                    <img src="logo-uta.png" alt="Logo UTA'45 Jakarta" style="height: 80px; width: auto; margin: 1rem 0; transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <p style="font-size: 1rem; color: #1e3c72; margin-top: 0.5rem;">Universitas 17 Agustus 1945 Jakarta</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h2 id="hero-title">Karang Taruna Kelurahan Pademangan Timur</h2>
+        <p id="hero-subtitle">Wadah Pengembangan dan Pemberdayaan Pemuda</p>
+        <a href="#visi-misi" class="btn" id="hero-btn">Lihat Lebih Lanjut</a>
+    </div>
+</section>
 
-    <section id="visi-misi" class="bg-light" style="position: relative;">
-        <div class="floating-deco deco1">✨</div>
-        <div class="floating-deco deco2">🎯</div>
-        <div class="floating-deco deco3">⚡</div>
-        <div class="floating-deco deco4">💡</div>
-        <div class="container">
-            <h2 class="section-title">Visi & Misi</h2>
-            <div class="box">
-                <h3>🌟 Visi</h3>
-                <p>Menjadikan Karang Taruna Kelurahan Pademangan Timur sebagai wadah serta fasilitator untuk mengembangkan potensi jiwa sosial serta memiliki kualitas yang bermanfaat untuk masyarakat luas di tahun 2027.</p>
-            </div>
-            <div class="box">
-                <h3>🚀 Misi</h3>
-                <ol>
-                    <li>Menanamkan ketaqwaan kepada Tuhan Yang Maha Esa</li>
-                    <li>Menjaga keutuhan dan kesatuan Karang Taruna Kelurahan Pademangan Timur</li>
-                    <li>Menumbuhkan rasa toleransi dan jiwa korsa terhadap sesama anggota</li>
-                    <li>Mengembangkan dan mewujudkan harapan serta cita-cita pemuda/i karang taruna kelurahan pademangan timur melalui bimbingan interaksi yang dilaksanakan baik secara individual maupun kelompok</li>
-                    <li>Mengimplementasikan Adhitya Karya Mahatva Yodha dalam kehidupan sehari-hari</li>
-                    <li>Mempertahankan kebenaran dan mencegah kemungkaran</li>
-                </ol>
-            </div>
-            <div class="box">
-                <h3>Peran</h3>
-                <div class="grid">
-                    <div class="grid-item">Wadah pengembangan dan pemberdayaan pemuda</div>
-                    <div class="grid-item">Motor penggerak kegiatan sosial dan kemanusiaan</div>
-                    <div class="grid-item">Penggerak ekonomi kreatif dan kewirausahaan pemuda</div>
-                    <div class="grid-item">Mitra strategis pemerintah kelurahan</div>
-                    <div class="grid-item">Agen pencegahan masalah sosial pemuda</div>
-                    <div class="grid-item">Penggerak partisipasi dan gotong royong masyarakat</div>
-                    <div class="grid-item">Pelopor inovasi sosial dan digital</div>
-                    <div class="grid-item">Penjaga nilai budaya dan kearifan lokal</div>
-                    <div class="grid-item">Penggerak kepedulian lingkungan hidup</div>
-                    <div class="grid-item">Penyalur aspirasi dan suara pemuda</div>
-                </div>
+<section id="profile" class="bg-blue">
+    <div class="container">
+        <h2 class="section-title">Profil Karang Taruna</h2>
+        <div class="profile-content">
+            <p id="profile-desc">Karang Taruna Kelurahan Pademangan Timur adalah organisasi kepemudaan yang berkomitmen untuk mengembangkan potensi pemuda dan berkontribusi bagi kesejahteraan masyarakat. Kami hadir sebagai motor penggerak kegiatan sosial, ekonomi kreatif, dan pemberdayaan masyarakat di wilayah Pademangan Timur.</p>
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #3b82f6;">
+                <h3 style="color: #1e3c72; font-size: 1.3rem; margin-bottom: 1rem;">🤝 Dukungan Institusi Pendidikan</h3>
+                <img src="logo-uta.png" alt="Logo UTA'45 Jakarta" class="site-logo" style="height: 80px; width: auto; margin: 1rem 0; transition: 0.3s; cursor: pointer;" onerror="this.style.display='none'">
+                <p id="profile-institution" style="font-size: 1rem; color: #1e3c72; margin-top: 0.5rem;">Universitas 17 Agustus 1945 Jakarta</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="struktur" class="bg-blue2" style="position: relative;">
-        <div class="floating-deco deco1">🏆</div>
-        <div class="floating-deco deco2">⭐</div>
-        <div class="floating-deco deco4">👥</div>
-        <div class="floating-deco deco5">💪</div>
-        <div class="container">
-            <h2 class="section-title">Struktur Kepengurusan</h2>
-            <h3 style="text-align:center; font-size:2rem; color:#1e3c72; margin-bottom:30px;">Pengurus Inti <span class="badge">🏆 Luar Biasa!</span></h3>
-            <div class="grid">
-                <div class="card"><h4>👑 Ketua</h4><p>Anwar Fauzi</p></div>
-                <div class="card"><h4>🌟 Wakil Ketua</h4><p>Agung Arisqi F Putra</p></div>
-                <div class="card"><h4>📝 Sekretaris Umum</h4><p>Bagus Ardhiawan</p></div>
-                <div class="card"><h4>✨ Wakil Sekretaris</h4><p>Shita Kartika Zahwa</p></div>
-                <div class="card"><h4>💰 Bendahara Umum</h4><p>Nur Dian Utami</p></div>
-            </div>
-            <h3 style="text-align:center; font-size:2rem; color:#1e3c72; margin:50px 0 30px;">Seksi-Seksi <span class="badge">⚡ Tim Solid</span></h3>
-            <div class="grid">
-                <div class="card2"><h4>🙏 Seksi Kerohanian</h4><p>Miftahul Chair<br>Rafli Salim</p></div>
-                <div class="card2"><h4>📢 Seksi Humas</h4><p>Shafira Syabania<br>Dimas Algifari<br>Ardian Ramadhani<br>Carudin</p></div>
-                <div class="card2"><h4>📚 Seksi Pendidikan, Pelatihan, Perempuan & Anak</h4><p>Siti Fatimah<br>Reza Aulia<br>Kyla<br>Salwa Salsabillah</p></div>
-                <div class="card2"><h4>🌱 Seksi Lingkungan Hidup</h4><p>M. Ilyas<br>Aji Febriyanto</p></div>
-                <div class="card2"><h4>❤️ Seksi Kesejahteraan Rakyat</h4><p>Karyadi Utama<br>Tiara Noviyanti<br>Putri Adelia</p></div>
-                <div class="card2"><h4>⚽ Seksi Olahraga</h4><p>Danu Pangestu<br>Angga</p></div>
-            </div>
-        </div>
-    </section>
+<section id="visi-misi" class="bg-light" style="position: relative;">
+    <div class="floating-deco deco1">✨</div>
+    <div class="floating-deco deco2">🎯</div>
+    <div class="floating-deco deco3">⚡</div>
+    <div class="floating-deco deco4">💡</div>
+    <div class="container">
+        <h2 class="section-title">Visi & Misi</h2>
+        <div class="box"><h3>🌟 Visi</h3><p id="visi-text"></p></div>
+        <div class="box"><h3>🚀 Misi</h3><ol id="misi-list"></ol></div>
+        <div class="box"><h3>Peran</h3><div class="grid" id="peran-grid"></div></div>
+    </div>
+</section>
 
-    <section id="kegiatan" class="bg-light" style="position: relative;">
-        <div class="floating-deco deco1">🎯</div>
-        <div class="floating-deco deco3">🚀</div>
-        <div class="floating-deco deco5">💡</div>
-        <div class="container">
-            <h2 class="section-title">Highlight Kegiatan Unggulan 2026 <span class="fun-emoji">🎉</span></h2>
-            <div class="grid highlight-grid">
-                <div class="highlight-card">
-                    <div class="highlight-num">📚</div>
-                    <h3>Gerakan Beasiswa & Pendidikan Pemuda</h3>
-                    <p><strong>Penanggung Jawab:</strong> Seksi Pendidikan, Pelatihan, Perempuan & Anak</p>
-                    <img src="gerakan-beasiswa.jpg" alt="Gerakan Beasiswa & Pendidikan Pemuda" style="width: 100%; height: auto; border-radius: 10px; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <ul>
-                        <li>✅ Transformasi Masa Depan - Membuka akses pendidikan tinggi bagi pemuda kurang mampu</li>
-                        <li>✅ Kemitraan Multi-Institusi - Kolaborasi dengan berbagai perguruan tinggi dan sekolah</li>
-                        <li>✅ Dampak Jangka Panjang - Investasi sumber daya manusia untuk kemajuan kelurahan</li>
-                    </ul>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-num">🏗️</div>
-                    <h3>Revitalisasi Total Infrastruktur Pemuda</h3>
-                    <p><strong>Penanggung Jawab:</strong> Seksi Lingkungan Hidup</p>
-                    <img src="Revitalisasi-Total.jpg" alt="Revitalisasi Total" style="width: 100%; height: auto; border-radius: 10px; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <ul>
-                        <li>✅ Transformasi Fisik Nyata - Perbaikan menyeluruh sarana pemuda di semua RW</li>
-                        <li>✅ Lingkungan Berkelanjutan - Menciptakan ruang hijau dan fasilitas ramah lingkungan</li>
-                    </ul>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-num">👥</div>
-                    <h3>Kepemimpinan Generasi Maju</h3>
-                    <p><strong>Penanggung Jawab:</strong> Semua Seksi</p>
-                    <img src="generasi-maju.jpg" alt="Kepemimpinan Generasi Maju" style="width: 100%; height: auto; border-radius: 10px; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <ul>
-                        <li>✅ Kaderisasi Sistematis - Membentuk 50 calon pemimpin muda berintegritas</li>
-                        <li>✅ Kurikulum Terstandarisasi - Modul kepemimpinan berbasis kompetensi nasional</li>
-                        <li>✅ Jaringan Nasional - Peluang kolaborasi dengan lembaga kepemimpinan terkemuka</li>
-                    </ul>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-num">⚽</div>
-                    <h3>Pekan Olahraga Pemersatu Masyarakat</h3>
-                    <p><strong>Penanggung Jawab:</strong> Seksi Olahraga</p>
-                    <img src="badminton-kegiatan.jpg" alt="Pekan Olahraga" style="width: 100%; height: auto; border-radius: 10px; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <ul>
-                        <li>✅ Pemersatu Multigenerasi - Menyatukan anak-anak, remaja, dewasa, dan lansia</li>
-                        <li>✅ Promosi Gaya Hidup Sehat - Kampanye kesehatan melalui olahraga massal</li>
-                        <li>✅ Event Signature Tahunan - Menjadi agenda tetap yang dinanti masyarakat</li>
-                    </ul>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-num">🤝</div>
-                    <h3>Jembatan Aspirasi & Kolaborasi Strategis</h3>
-                    <p><strong>Penanggung Jawab:</strong> Seksi Humas</p>
-                    <img src="jembatan-aspirasi.jpg" alt="Jembatan aspirasi" style="width: 100%; height: auto; border-radius: 10px; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <ul>
-                        <li>✅ Akses Pengambilan Kebijakan - Penyampaian aspirasi langsung ke eksekutif dan legislatif</li>
-                        <li>✅ Kemitraan Multi-Pihak - Jejaring dengan pemerintah, swasta, dan komunitas</li>
-                        <li>✅ Legitimasi & Pendanaan - Pengakuan resmi dan potensi dukungan dana berkelanjutan</li>
-                    </ul>
-                </div>
-            </div>
+<section id="struktur" class="bg-blue2" style="position: relative;">
+    <div class="floating-deco deco1">🏆</div>
+    <div class="floating-deco deco2">⭐</div>
+    <div class="floating-deco deco4">👥</div>
+    <div class="floating-deco deco5">💪</div>
+    <div class="container">
+        <h2 class="section-title">Struktur Kepengurusan</h2>
+        <h3 style="text-align:center; font-size:2rem; color:#1e3c72; margin-bottom:30px;">Pengurus Inti <span class="badge">🏆 Luar Biasa!</span></h3>
+        <div class="grid" id="pengurus-grid"></div>
+        <h3 style="text-align:center; font-size:2rem; color:#1e3c72; margin:50px 0 30px;">Seksi-Seksi <span class="badge">⚡ Tim Solid</span></h3>
+        <div class="grid" id="seksi-grid"></div>
+    </div>
+</section>
 
-            <h2 class="section-title" style="margin-top:60px;">Program Kerja 2026 <span class="fun-emoji">💪</span></h2>
-            <div class="accordion" id="programKerjaList">
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion(event)">🙏 Seksi Kerohanian</div>
-                    <div class="accordion-content">
-                        <ul>
-                            <li>Pawai Isra Mi'raj - 2026</li>
-                            <li>Pawai Obor Ramadhan - Ramadhan 2026</li>
-                            <li>Pesantren Kilat & Santunan Anak Yatim Piatu - Ramadhan 2026</li>
-                            <li>Lomba & Pawai Tahun Baru Islam 1 Muharram - 2026</li>
-                            <li>Kajian Rutin Bulanan Pemuda - Setiap bulan</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion(event)">📢 Seksi Humas</div>
-                    <div class="accordion-content">
-                        <ul> 
-                           <li>Silaturahmi dengan UKKT se-Pademangan Timur - Januari 2026</li>
-                           <li>Audiensi dengan PPK Kemayoran - 2026</li>
-                           <li>Audiensi dengan Anggota DPRD - 2026</li>
-                           <li>Audiensi dengan PT Taman Impian Jaya Ancol - 2026</li>
-                           <li>Media Sosial & Publikasi Kegiatan - Berkelanjutan</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion(event)">📚 Seksi Pendidikan, Pelatihan, Perempuan & Anak</div>
-                    <div class="accordion-content">
-                        <ul>
-                            <li>Sosialisasi Beasiswa dengan Universitas dan SMA/SMK 2026</li>
-                            <li>Pelatihan Keterampilan untuk Perempuan & Remaja Putri - 2026</li>
-                            <li>Workshop Literasi Digital untuk Pemuda - 2026</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion(event)">🌱 Seksi Lingkungan Hidup</div>
-                    <div class="accordion-content">
-                        <ul>
-                            <li>Kerja Bakti se-Kelurahan Pademangan Timur - Januari - Desember 2026</li> 
-                            <li>Peremajaan UKKT RW Kelurahan Pademangan Timur - Januari & Februari 2026</li>
-                            <li>Hari Peduli Sampah Nasional (kolaborasi Ancol) 2026</li>
-                            <li>Penghijauan & Tanam Pohon 2026</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion(event)">❤️ Seksi Kesejahteraan Rakyat</div>
-                    <div class="accordion-content">
-                        <ul>
-                            <li>Bulan Bakti Karang Taruna ke-67 (bakti sosial) - September & Oktober 2026</li> 
-                            <li>Santunan Anak yatim Piatu, Lansia & Keluarga Tidak Mampu - 2026</li>
-                            <li>Pemeriksaan Kesehatan Gratis - 2026</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion(event)">⚽ Seksi Olahraga</div>
-                    <div class="accordion-content">
-                        <ul>
-                            <li>Have Fun Badminton, Tenis Meja, Catur & Futsal - 2026</li>
-                            <li>Pekan Olahraga Karang Taruna - 2026</li>
-                            <li>Fun Run Pemuda - 2026</li>
-                         </ul>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion(event)">🚀 Kegiatan Bersama Semua Seksi</div>
-                    <div class="accordion-content">
-                        <ul>
-                            <li>Latihan Kepemimpinan Karang Taruna - 2026</li> 
-                            <li>Rapat Evaluasi & Perencanaan Triwulanan - Maret, Juni, September, Desember 2026</li>
-                        </ul>
-                    </div>
-                </div>
+<section id="kegiatan" class="bg-light" style="position: relative;">
+    <div class="floating-deco deco1">🎯</div>
+    <div class="floating-deco deco3">🚀</div>
+    <div class="floating-deco deco5">💡</div>
+    <div class="container">
+        <h2 class="section-title">Highlight Kegiatan Unggulan 2026 <span class="fun-emoji">🎉</span></h2>
+        <div class="grid highlight-grid" id="highlight-grid"></div>
+        <h2 class="section-title" style="margin-top:60px;">Program Kerja 2026 <span class="fun-emoji">💪</span></h2>
+        <div class="accordion" id="programKerjaList"></div>
+    </div>
+</section>
+
+<div id="lightbox" onclick="if(event.target===this)closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <button class="lb-nav lb-prev" onclick="lbNav(-1)">‹</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-caption" id="lb-caption"></div>
+    <button class="lb-nav lb-next" onclick="lbNav(1)">›</button>
+</div>
+
+<section id="kontak" class="bg-dark" style="position: relative;">
+    <div class="floating-deco deco1">📱</div>
+    <div class="floating-deco deco2">💬</div>
+    <div class="floating-deco deco4">🎯</div>
+    <div class="container">
+        <h2 class="section-title" style="color:white;">Hubungi Kami <span class="fun-emoji">📞</span></h2>
+        <div class="grid">
+            <div class="kontak-box">
+                <h3><span class="phone-icon pulse">☎️</span> Narahubung</h3>
+                <div id="kontak-persons"></div>
+            </div>
+            <div class="kontak-box">
+                <h3><span class="phone-icon">📱</span> Media Sosial & Email <span class="fun-emoji">💌</span></h3>
+                <div id="kontak-sosmed"></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="kontak" class="bg-dark" style="position: relative;">
-        <div class="floating-deco deco1">📱</div>
-        <div class="floating-deco deco2">💬</div>
-        <div class="floating-deco deco4">🎯</div>
-        <div class="container">
-            <h2 class="section-title" style="color:white;">Hubungi Kami <span class="fun-emoji">📞</span></h2>
-            <div class="grid">
-                <div class="kontak-box">
-                    <h3><span class="phone-icon pulse">☎️</span>Narahubung</h3>
-                    <div class="kontak-item">
-                        <p>👤 <strong>Dimas Algifari</strong></p>
-                        <p>📱 <a href="tel:087781858105">0877-8185-8105</a></p>
-                    </div>
-                    <div class="kontak-item">
-                        <p>👤 <strong>Ardian Ramadhani</strong></p>
-                        <p>📱 <a href="tel:081298437997">0812-9843-7997</a></p>
-                    </div>
-                    <div class="kontak-item">
-                        <p>👤 <strong>Shafira Syabania</strong></p>
-                        <p>📱 <a href="tel:088101249588">0881-0124-9588</a></p>
-                    </div>
-                </div>
-                <div class="kontak-box">
-                    <h3><span class="phone-icon ring">📱</span>Media Sosial & Email <span class="fun-emoji">💌</span></h3>
-                    <div class="kontak-item">
-                        <p>📸 <strong>Instagram</strong></p>
-                        <p><a href="https://instagram.com/katar.padtim" target="_blank">@katar.padtim</a></p>
-                    </div>
-                    <div class="kontak-item">
-                        <p>🎵 <strong>TikTok</strong></p>
-                        <p><a href="https://www.tiktok.com/@katar.padtim" target="_blank">@katar.padtim</a></p>
-                    </div>
-                    <div class="kontak-item">
-                        <p>📺 <strong>YouTube</strong></p>
-                        <p><a href="https://youtube.com/@karangtarunapadtimura" target="_blank">@karangtarunapadtimura</a></p>
-                    </div>
-                    <div class="kontak-item">
-                        <p>✉️ <strong>Email</strong></p>
-                        <p><a href="/cdn-cgi/l/email-protection#750514111018141b12141b011c1800071e1407141b12011407001b14351218141c195b161a18"><span class="__cf_email__" data-cfemail="ddadbcb9b8b0bcb3babcb3a9b4b0a8afb6bcafbcb3baa9bcafa8b3bc9dbab0bcb4b1f3beb2b0">[email&#160;protected]</span></a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<footer style="position: relative;">
+    <div style="position: absolute; bottom: 20%; left: 2%; font-size: 2rem; opacity: 0.3; animation: twinkle 3s ease-in-out infinite;">⭐</div>
+    <div style="position: absolute; bottom: 15%; right: 5%; font-size: 1.8rem; opacity: 0.3; animation: pulse 2s ease-in-out infinite;">✨</div>
+    <div class="container" style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+        <img id="footer-logo" src="logo-uta-Merah-bergandengan2022.png" alt="Logo" style="height: 60px; width: auto; opacity: 0.9;" onerror="this.style.display='none'">
+        <p id="footer-text">&copy; 2026 Karang Taruna Kelurahan Pademangan Timur. Bersama Membangun Masa Depan Cemerlang 🚀</p>
+    </div>
+</footer>
 
-    <footer style="position: relative;">
-        <div style="position: absolute; bottom: 20%; left: 2%; font-size: 2rem; opacity: 0.3; animation: twinkle 3s ease-in-out infinite;">⭐</div>
-        <div style="position: absolute; bottom: 15%; right: 5%; font-size: 1.8rem; opacity: 0.3; animation: pulse 2s ease-in-out infinite;">✨</div>
-        <div class="container" style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-            <img src="logo-uta-Merah-bergandengan2022.png" alt="Logo UTA'45 Jakarta" style="height: 60px; width: auto; opacity: 0.9;">
-            <p>&copy; 2026 Karang Taruna Kelurahan Pademangan Timur. Bersama Membangun Masa Depan Cemerlang <span style="font-size: 1.3rem;">🚀</span></p>
-        </div>
-    </footer>
+<script>
+// ============================================================
+//  INDEXEDDB - PENYIMPANAN FOTO (MENGGANTIKAN LOCALSTORAGE)
+//  Kapasitas jauh lebih besar, bisa simpan foto ratusan MB
+// ============================================================
+const DB_NAME = 'kt_padtim_db';
+const DB_VERSION = 2;
+const STORE_DATA = 'data';
+const STORE_PHOTOS = 'photos';
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Accordion functionality
-        function toggleAccordion(event) {
-            const header = event.target;
-            const item = header.parentElement;
-            const wasActive = item.classList.contains('active');
-            
-            // Close all accordion items
-            document.querySelectorAll('.accordion-item').forEach(i => {
-                i.classList.remove('active');
-            });
-            
-            // Toggle current item
-            if (!wasActive) {
-                item.classList.add('active');
+let db = null;
+
+function openDB() {
+    return new Promise((resolve, reject) => {
+        if (db) return resolve(db);
+        const req = indexedDB.open(DB_NAME, DB_VERSION);
+        req.onupgradeneeded = e => {
+            const d = e.target.result;
+            if (!d.objectStoreNames.contains(STORE_DATA)) d.createObjectStore(STORE_DATA);
+            if (!d.objectStoreNames.contains(STORE_PHOTOS)) d.createObjectStore(STORE_PHOTOS);
+        };
+        req.onsuccess = e => { db = e.target.result; resolve(db); };
+        req.onerror = e => reject(e.target.error);
+    });
+}
+
+async function dbGet(store, key) {
+    const d = await openDB();
+    return new Promise((resolve, reject) => {
+        const tx = d.transaction(store, 'readonly');
+        const req = tx.objectStore(store).get(key);
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+    });
+}
+
+async function dbPut(store, key, value) {
+    const d = await openDB();
+    return new Promise((resolve, reject) => {
+        const tx = d.transaction(store, 'readwrite');
+        const req = tx.objectStore(store).put(value, key);
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+    });
+}
+
+async function dbDelete(store, key) {
+    const d = await openDB();
+    return new Promise((resolve, reject) => {
+        const tx = d.transaction(store, 'readwrite');
+        const req = tx.objectStore(store).delete(key);
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+    });
+}
+
+async function dbGetAll(store) {
+    const d = await openDB();
+    return new Promise((resolve, reject) => {
+        const tx = d.transaction(store, 'readonly');
+        const req = tx.objectStore(store).getAll();
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+    });
+}
+
+async function dbGetAllKeys(store) {
+    const d = await openDB();
+    return new Promise((resolve, reject) => {
+        const tx = d.transaction(store, 'readonly');
+        const req = tx.objectStore(store).getAllKeys();
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+    });
+}
+
+// ============================================================
+//  KOMPRESI GAMBAR OTOMATIS
+//  Foto ukuran apa pun bisa diupload - otomatis dikompres
+// ============================================================
+function compressImage(file, maxWidthOrHeight = 1920, quality = 0.85) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let w = img.width, h = img.height;
+                // Scale down jika terlalu besar
+                if (w > maxWidthOrHeight || h > maxWidthOrHeight) {
+                    if (w > h) { h = Math.round(h * maxWidthOrHeight / w); w = maxWidthOrHeight; }
+                    else { w = Math.round(w * maxWidthOrHeight / h); h = maxWidthOrHeight; }
+                }
+                canvas.width = w;
+                canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+                // Tentukan format output
+                const isPNG = file.type === 'image/png';
+                const outputType = isPNG ? 'image/png' : 'image/jpeg';
+                const dataUrl = canvas.toDataURL(outputType, isPNG ? undefined : quality);
+                resolve(dataUrl);
+            };
+            img.onerror = reject;
+            img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+// Versi kompresi yang lebih aman (tangani PNG & JPEG)
+function compressImageSafe(file, maxDim = 1920, quality = 0.85) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = evt => {
+            const img = new Image();
+            img.onload = () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    let { width: w, height: h } = img;
+                    if (w > maxDim || h > maxDim) {
+                        if (w >= h) { h = Math.round(h * maxDim / w); w = maxDim; }
+                        else { w = Math.round(w * maxDim / h); h = maxDim; }
+                    }
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    // Latar putih untuk JPEG (mencegah background hitam)
+                    if (file.type !== 'image/png') {
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(0, 0, w, h);
+                    }
+                    ctx.drawImage(img, 0, 0, w, h);
+                    const isPng = file.type === 'image/png';
+                    const mimeType = isPng ? 'image/png' : 'image/jpeg';
+                    const q = isPng ? undefined : quality;
+                    const result = canvas.toDataURL(mimeType, q);
+                    resolve(result);
+                } catch(err) {
+                    // Fallback: pakai FileReader biasa jika canvas gagal
+                    resolve(evt.target.result);
+                }
+            };
+            img.onerror = () => resolve(evt.target.result); // fallback
+            img.src = evt.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+// ============================================================
+//  DATA STORE
+// ============================================================
+const DEFAULT_DATA = {
+    hero: { title: "Karang Taruna Kelurahan Pademangan Timur", subtitle: "Wadah Pengembangan dan Pemberdayaan Pemuda", btnText: "Lihat Lebih Lanjut", btnLink: "#visi-misi" },
+    orgName: "Karang Taruna Kelurahan Pademangan Timur",
+    profile: { desc: "Karang Taruna Kelurahan Pademangan Timur adalah organisasi kepemudaan yang berkomitmen untuk mengembangkan potensi pemuda dan berkontribusi bagi kesejahteraan masyarakat. Kami hadir sebagai motor penggerak kegiatan sosial, ekonomi kreatif, dan pemberdayaan masyarakat di wilayah Pademangan Timur.", institution: "Universitas 17 Agustus 1945 Jakarta" },
+    visi: "Menjadikan Karang Taruna Kelurahan Pademangan Timur sebagai wadah serta fasilitator untuk mengembangkan potensi jiwa sosial serta memiliki kualitas yang bermanfaat untuk masyarakat luas di tahun 2027.",
+    misi: ["Menanamkan ketaqwaan kepada Tuhan Yang Maha Esa","Menjaga keutuhan dan kesatuan Karang Taruna Kelurahan Pademangan Timur","Menumbuhkan rasa toleransi dan jiwa korsa terhadap sesama anggota","Mengembangkan dan mewujudkan harapan serta cita-cita pemuda/i karang taruna kelurahan pademangan timur melalui bimbingan interaksi yang dilaksanakan baik secara individual maupun kelompok","Mengimplementasikan Adhitya Karya Mahatva Yodha dalam kehidupan sehari-hari","Mempertahankan kebenaran dan mencegah kemungkaran"],
+    peran: ["Wadah pengembangan dan pemberdayaan pemuda","Motor penggerak kegiatan sosial dan kemanusiaan","Penggerak ekonomi kreatif dan kewirausahaan pemuda","Mitra strategis pemerintah kelurahan","Agen pencegahan masalah sosial pemuda","Penggerak partisipasi dan gotong royong masyarakat","Pelopor inovasi sosial dan digital","Penjaga nilai budaya dan kearifan lokal","Penggerak kepedulian lingkungan hidup","Penyalur aspirasi dan suara pemuda"],
+    pengurus: [
+        { icon: "👑", jabatan: "Ketua", nama: "Anwar Fauzi" },
+        { icon: "🌟", jabatan: "Wakil Ketua", nama: "Agung Arisqi F Putra" },
+        { icon: "📝", jabatan: "Sekretaris Umum", nama: "Bagus Ardhiawan" },
+        { icon: "✨", jabatan: "Wakil Sekretaris", nama: "Shita Kartika Zahwa" },
+        { icon: "💰", jabatan: "Bendahara Umum", nama: "Nur Dian Utami" }
+    ],
+    seksi: [
+        { icon: "🙏", nama: "Seksi Kerohanian", anggota: ["Miftahul Chair", "Rafli Salim"] },
+        { icon: "📢", nama: "Seksi Humas", anggota: ["Shafira Syabania", "Dimas Algifari", "Ardian Ramadhani", "Carudin"] },
+        { icon: "📚", nama: "Seksi Pendidikan, Pelatihan, Perempuan & Anak", anggota: ["Siti Fatimah", "Reza Aulia", "Kyla", "Salwa Salsabillah"] },
+        { icon: "🌱", nama: "Seksi Lingkungan Hidup", anggota: ["M. Ilyas", "Aji Febriyanto"] },
+        { icon: "❤️", nama: "Seksi Kesejahteraan Rakyat", anggota: ["Karyadi Utama", "Tiara Noviyanti", "Putri Adelia"] },
+        { icon: "⚽", nama: "Seksi Olahraga", anggota: ["Danu Pangestu", "Angga"] }
+    ],
+    highlight: [
+        { icon: "📚", title: "Gerakan Beasiswa & Pendidikan Pemuda", pic: "Seksi Pendidikan, Pelatihan, Perempuan & Anak", imgKey: null, items: ["✅ Transformasi Masa Depan - Membuka akses pendidikan tinggi bagi pemuda kurang mampu","✅ Kemitraan Multi-Institusi - Kolaborasi dengan berbagai perguruan tinggi dan sekolah","✅ Dampak Jangka Panjang - Investasi sumber daya manusia untuk kemajuan kelurahan"] },
+        { icon: "🏗️", title: "Revitalisasi Total Infrastruktur Pemuda", pic: "Seksi Lingkungan Hidup", imgKey: null, items: ["✅ Transformasi Fisik Nyata - Perbaikan menyeluruh sarana pemuda di semua RW","✅ Lingkungan Berkelanjutan - Menciptakan ruang hijau dan fasilitas ramah lingkungan"] },
+        { icon: "👥", title: "Kepemimpinan Generasi Maju", pic: "Semua Seksi", imgKey: null, items: ["✅ Kaderisasi Sistematis - Membentuk 50 calon pemimpin muda berintegritas","✅ Kurikulum Terstandarisasi - Modul kepemimpinan berbasis kompetensi nasional","✅ Jaringan Nasional - Peluang kolaborasi dengan lembaga kepemimpinan terkemuka"] },
+        { icon: "⚽", title: "Pekan Olahraga Pemersatu Masyarakat", pic: "Seksi Olahraga", imgKey: null, items: ["✅ Pemersatu Multigenerasi - Menyatukan anak-anak, remaja, dewasa, dan lansia","✅ Promosi Gaya Hidup Sehat - Kampanye kesehatan melalui olahraga massal","✅ Event Signature Tahunan - Menjadi agenda tetap yang dinanti masyarakat"] },
+        { icon: "🤝", title: "Jembatan Aspirasi & Kolaborasi Strategis", pic: "Seksi Humas", imgKey: null, items: ["✅ Akses Pengambilan Kebijakan - Penyampaian aspirasi langsung ke eksekutif dan legislatif","✅ Kemitraan Multi-Pihak - Jejaring dengan pemerintah, swasta, dan komunitas","✅ Legitimasi & Pendanaan - Pengakuan resmi dan potensi dukungan dana berkelanjutan"] }
+    ],
+    program: [
+        { icon: "🙏", nama: "Seksi Kerohanian", items: ["Pawai Isra Mi'raj - 2026","Pawai Obor Ramadhan - Ramadhan 2026","Pesantren Kilat & Santunan Anak Yatim Piatu - Ramadhan 2026","Lomba & Pawai Tahun Baru Islam 1 Muharram - 2026","Kajian Rutin Bulanan Pemuda - Setiap bulan"] },
+        { icon: "📢", nama: "Seksi Humas", items: ["Silaturahmi dengan UKKT se-Pademangan Timur - Januari 2026","Audiensi dengan PPK Kemayoran - 2026","Audiensi dengan Anggota DPRD - 2026","Audiensi dengan PT Taman Impian Jaya Ancol - 2026","Media Sosial & Publikasi Kegiatan - Berkelanjutan"] },
+        { icon: "📚", nama: "Seksi Pendidikan, Pelatihan, Perempuan & Anak", items: ["Sosialisasi Beasiswa dengan Universitas dan SMA/SMK 2026","Pelatihan Keterampilan untuk Perempuan & Remaja Putri - 2026","Workshop Literasi Digital untuk Pemuda - 2026"] },
+        { icon: "🌱", nama: "Seksi Lingkungan Hidup", items: ["Kerja Bakti se-Kelurahan Pademangan Timur - Januari - Desember 2026","Peremajaan UKKT RW Kelurahan Pademangan Timur - Januari & Februari 2026","Hari Peduli Sampah Nasional (kolaborasi Ancol) 2026","Penghijauan & Tanam Pohon 2026"] },
+        { icon: "❤️", nama: "Seksi Kesejahteraan Rakyat", items: ["Bulan Bakti Karang Taruna ke-67 (bakti sosial) - September & Oktober 2026","Santunan Anak yatim Piatu, Lansia & Keluarga Tidak Mampu - 2026","Pemeriksaan Kesehatan Gratis - 2026"] },
+        { icon: "⚽", nama: "Seksi Olahraga", items: ["Have Fun Badminton, Tenis Meja, Catur & Futsal - 2026","Pekan Olahraga Karang Taruna - 2026","Fun Run Pemuda - 2026"] },
+        { icon: "🚀", nama: "Kegiatan Bersama Semua Seksi", items: ["Latihan Kepemimpinan Karang Taruna - 2026","Rapat Evaluasi & Perencanaan Triwulanan - Maret, Juni, September, Desember 2026"] }
+    ],
+    kontakPersons: [
+        { nama: "Dimas Algifari", telp: "087781858105", display: "0877-8185-8105" },
+        { nama: "Ardian Ramadhani", telp: "081298437997", display: "0812-9843-7997" },
+        { nama: "Shafira Syabania", telp: "088101249588", display: "0881-0124-9588" }
+    ],
+    kontakSosmed: [
+        { icon: "📸", platform: "Instagram", value: "@katar.padtim", link: "https://instagram.com/katar.padtim" },
+        { icon: "🎵", platform: "TikTok", value: "@katar.padtim", link: "https://www.tiktok.com/@katar.padtim" },
+        { icon: "📺", platform: "YouTube", value: "@karangtarunapadtimura", link: "https://youtube.com/@karangtarunapadtimura" },
+        { icon: "✉️", platform: "Email", value: "karangtarunapadtim@gmail.com", link: "mailto:karangtarunapadtim@gmail.com" }
+    ],
+    footer: "© 2026 Karang Taruna Kelurahan Pademangan Timur. Bersama Membangun Masa Depan Cemerlang 🚀",
+    adminPass: "admin2026",
+    logoAlt: "Logo UTA'45 Jakarta"
+};
+
+let DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
+
+// Cache foto yang sudah diload dari IndexedDB (supaya tidak perlu load ulang)
+const photoCache = {};
+
+async function loadData() {
+    try {
+        await openDB();
+        // Load data teks dari IndexedDB (gantikan localStorage)
+        const saved = await dbGet(STORE_DATA, 'main');
+        if (saved) {
+            DATA = { ...JSON.parse(JSON.stringify(DEFAULT_DATA)), ...saved };
+            // Pastikan field penting ada
+            if (!DATA.logoAlt) DATA.logoAlt = "Logo UTA'45 Jakarta";
+        }
+        // Migrasi dari localStorage lama (jika ada)
+        await migrateFromLocalStorage();
+    } catch(e) {
+        console.warn('IndexedDB load error, fallback ke localStorage:', e);
+        loadFromLocalStorage();
+    }
+}
+
+async function migrateFromLocalStorage() {
+    try {
+        const old = localStorage.getItem('kt_padtim_data');
+        if (!old) return;
+        const oldData = JSON.parse(old);
+        // Pindahkan foto dari localStorage ke IndexedDB
+        if (oldData.heroBg) { await dbPut(STORE_PHOTOS, 'heroBg', oldData.heroBg); delete oldData.heroBg; }
+        if (oldData.logoSrc) { await dbPut(STORE_PHOTOS, 'logoMain', oldData.logoSrc); delete oldData.logoSrc; }
+        if (oldData.logoFooterSrc) { await dbPut(STORE_PHOTOS, 'logoFooter', oldData.logoFooterSrc); delete oldData.logoFooterSrc; }
+        if (oldData.fotosPengurus) {
+            for (const [nama, src] of Object.entries(oldData.fotosPengurus)) {
+                await dbPut(STORE_PHOTOS, 'pengurus_' + nama, src);
+            }
+            delete oldData.fotosPengurus;
+        }
+        // Migrasi highlight imgFile
+        if (oldData.highlight) {
+            for (let i = 0; i < oldData.highlight.length; i++) {
+                const h = oldData.highlight[i];
+                if (h.imgFile) {
+                    const key = 'highlight_' + i + '_' + Date.now();
+                    await dbPut(STORE_PHOTOS, key, h.imgFile);
+                    oldData.highlight[i].imgKey = key;
+                    delete oldData.highlight[i].imgFile;
+                    delete oldData.highlight[i].imgSrc;
+                }
             }
         }
+        DATA = { ...DATA, ...oldData };
+        await saveData();
+        localStorage.removeItem('kt_padtim_data');
+        console.log('✅ Migrasi dari localStorage berhasil');
+    } catch(e) {
+        console.warn('Migrasi gagal:', e);
+    }
+}
 
-        // Admin access functionality (simplified for demo)
-        let clickCount = 0;
-        let lastClickTime = 0;
-        const clickTimeout = 400;
-        
-        document.addEventListener('mousedown', function(e) {
-            const now = Date.now();
-            
-            if (now - lastClickTime > clickTimeout) {
-                clickCount = 1;
-            } else {
-                clickCount++;
-            }
-            
-            lastClickTime = now;
-            
-            if (clickCount >= 3) {
-                clickCount = 0;
-                showAdminButton();
-            }
-        });
-        
-        function showAdminButton() {
-            const btn = document.getElementById('adminAccessBtn');
-            if (btn) {
-                btn.classList.add('show');
-                setTimeout(() => {
-                    btn.classList.remove('show');
-                }, 5000);
-            }
+function loadFromLocalStorage() {
+    try {
+        const saved = localStorage.getItem('kt_padtim_data');
+        if (saved) DATA = { ...DATA, ...JSON.parse(saved) };
+    } catch(e) {}
+}
+
+async function saveData() {
+    try {
+        await dbPut(STORE_DATA, 'main', DATA);
+    } catch(e) {
+        // Fallback ke localStorage (tanpa foto)
+        try {
+            const slim = { ...DATA };
+            localStorage.setItem('kt_padtim_data', JSON.stringify(slim));
+        } catch(e2) {}
+    }
+}
+
+// Load foto dari IndexedDB (dengan cache)
+async function getPhoto(key) {
+    if (!key) return null;
+    if (photoCache[key] !== undefined) return photoCache[key];
+    try {
+        const src = await dbGet(STORE_PHOTOS, key);
+        photoCache[key] = src || null;
+        return photoCache[key];
+    } catch(e) {
+        return null;
+    }
+}
+
+async function savePhoto(key, dataUrl) {
+    photoCache[key] = dataUrl;
+    await dbPut(STORE_PHOTOS, key, dataUrl);
+}
+
+async function deletePhoto(key) {
+    if (!key) return;
+    delete photoCache[key];
+    await dbDelete(STORE_PHOTOS, key);
+}
+
+// ============================================================
+//  RENDER SITE (async karena perlu load foto dari IndexedDB)
+// ============================================================
+async function renderSite() {
+    // Teks
+    document.getElementById('hero-title').textContent = DATA.hero.title;
+    document.getElementById('hero-subtitle').textContent = DATA.hero.subtitle;
+    const heroBtn = document.getElementById('hero-btn');
+    heroBtn.textContent = DATA.hero.btnText;
+    heroBtn.href = DATA.hero.btnLink;
+    document.getElementById('site-org-name').textContent = DATA.orgName;
+    document.getElementById('profile-desc').textContent = DATA.profile.desc;
+    document.getElementById('profile-institution').textContent = DATA.profile.institution;
+    document.getElementById('visi-text').textContent = DATA.visi;
+    document.getElementById('misi-list').innerHTML = DATA.misi.map(m => `<li>${m}</li>`).join('');
+    document.getElementById('peran-grid').innerHTML = DATA.peran.map(p => `<div class="grid-item">${p}</div>`).join('');
+    document.getElementById('seksi-grid').innerHTML = DATA.seksi.map(s => `<div class="card2"><h4>${s.icon} ${s.nama}</h4><p>${s.anggota.join('<br>')}</p></div>`).join('');
+    document.getElementById('footer-text').innerHTML = DATA.footer;
+    document.getElementById('kontak-persons').innerHTML = DATA.kontakPersons.map(k => `<div class="kontak-item"><p>👤 <strong>${k.nama}</strong></p><p>📱 <a href="tel:${k.telp}">${k.display}</a></p></div>`).join('');
+    document.getElementById('kontak-sosmed').innerHTML = DATA.kontakSosmed.map(s => `<div class="kontak-item"><p>${s.icon} <strong>${s.platform}</strong></p><p><a href="${s.link}" target="_blank">${s.value}</a></p></div>`).join('');
+    document.getElementById('programKerjaList').innerHTML = DATA.program.map(p => `<div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(event)">${p.icon} ${p.nama}</div><div class="accordion-content"><ul>${p.items.map(i => `<li>${i}</li>`).join('')}</ul></div></div>`).join('');
+
+    // Hero background (async)
+    const heroBg = await getPhoto('heroBg');
+    const heroEl = document.getElementById('home');
+    if (heroBg) heroEl.style.backgroundImage = `linear-gradient(rgba(30,60,114,0.6), rgba(59,130,246,0.6)), url(${heroBg})`;
+    else heroEl.style.backgroundImage = '';
+
+    // Logo (async)
+    const logoMain = await getPhoto('logoMain');
+    const logoAlt = DATA.logoAlt || "Logo UTA'45 Jakarta";
+    document.querySelectorAll('.site-logo').forEach(el => {
+        if (logoMain) { el.src = logoMain; el.style.display = ''; }
+        else el.src = 'logo-uta.png';
+        el.alt = logoAlt;
+    });
+    const logoFooter = await getPhoto('logoFooter');
+    const footerLogoEl = document.getElementById('footer-logo');
+    if (footerLogoEl) {
+        if (logoFooter) { footerLogoEl.src = logoFooter; footerLogoEl.style.display = ''; }
+        else footerLogoEl.src = 'logo-uta-Merah-bergandengan2022.png';
+        footerLogoEl.alt = logoAlt;
+    }
+
+    // Pengurus (async, load foto satu per satu)
+    const pengurusGrid = document.getElementById('pengurus-grid');
+    pengurusGrid.innerHTML = '';
+    for (const p of DATA.pengurus) {
+        const foto = await getPhoto('pengurus_' + p.nama);
+        const div = document.createElement('div');
+        if (foto) {
+            div.className = 'card has-photo';
+            div.innerHTML = `<img class="card-photo" src="${foto}" alt="${p.nama}"><div class="card-info"><h4>${p.icon} ${p.jabatan}</h4><p>${p.nama}</p></div>`;
+        } else {
+            div.className = 'card';
+            div.innerHTML = `<h4>${p.icon} ${p.jabatan}</h4><p>${p.nama}</p>`;
         }
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.altKey && (e.key === 'a' || e.key === 'A')) {
-                e.preventDefault();
-                showAdminButton();
-            }
-        });
+        pengurusGrid.appendChild(div);
+    }
 
-        // Smooth scroll untuk nav links
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventLis
+    // Highlight (async)
+    const highlightGrid = document.getElementById('highlight-grid');
+    highlightGrid.innerHTML = '';
+    for (let i = 0; i < DATA.highlight.length; i++) {
+        const h = DATA.highlight[i];
+        const imgSrc = h.imgKey ? await getPhoto(h.imgKey) : null;
+        const div = document.createElement('div');
+        div.className = 'highlight-card';
+        div.innerHTML = `
+            <div class="highlight-num">${h.icon}</div>
+            <h3>${h.title}</h3>
+            <p><strong>Penanggung Jawab:</strong> ${h.pic}</p>
+            ${imgSrc ? `<img src="${imgSrc}" alt="${h.title}" style="width:100%;height:auto;border-radius:10px;margin:15px 0;box-shadow:0 5px 15px rgba(0,0,0,0.1);">` : ''}
+            <ul>${h.items.map(it => `<li>${it}</li>`).join('')}</ul>
+        `;
+        highlightGrid.appendChild(div);
+    }
+
+}
+
+function toggleAccordion(event) {
+    const item = event.target.parentElement;
+    const wasActive = item.classList.contains('active');
+    document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+    if (!wasActive) item.classList.add('active');
+}
+
+// ============================================================
+//  LIGHTBOX (dinonaktifkan - galeri dihapus)
+// ============================================================
+function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+function lbNav(dir) {}
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lbNav(-1);
+    if (e.key === 'ArrowRight') lbNav(1);
+});
+
+// ============================================================
+//  ADMIN AKSES
+// ============================================================
+let konami = [];
+const konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.altKey && (e.key === 'a' || e.key === 'A')) { e.preventDefault(); openAdmin(); return; }
+    konami.push(e.key); konami = konami.slice(-10);
+    if (JSON.stringify(konami) === JSON.stringify(konamiCode)) openAdmin();
+});
+let adminClickCount = 0, adminClickTimer;
+document.addEventListener('click', e => {
+    if (e.target.closest('#adminOverlay')) return;
+    adminClickCount++;
+    clearTimeout(adminClickTimer);
+    adminClickTimer = setTimeout(() => { adminClickCount = 0; }, 500);
+    if (adminClickCount >= 5) { adminClickCount = 0; openAdmin(); }
+});
+
+// Session login: simpan status login di sessionStorage
+// (otomatis hilang saat tab/browser ditutup, tapi bertahan selama tab masih buka)
+const ADMIN_SESSION_KEY = 'kt_admin_authed';
+
+function isAdminAuthed() {
+    return sessionStorage.getItem(ADMIN_SESSION_KEY) === '1';
+}
+function setAdminAuthed(val) {
+    if (val) sessionStorage.setItem(ADMIN_SESSION_KEY, '1');
+    else sessionStorage.removeItem(ADMIN_SESSION_KEY);
+}
+
+function openAdmin() {
+    document.getElementById('adminOverlay').classList.add('active');
+    if (isAdminAuthed()) {
+        // Sudah login di sesi ini - langsung masuk tanpa password
+        document.getElementById('adminLogin').style.display = 'none';
+        document.getElementById('adminDashboard').classList.add('active');
+        const lastPanel = sessionStorage.getItem('kt_admin_panel') || 'hero';
+        switchPanel(lastPanel);
+    } else {
+        document.getElementById('adminPassInput').value = '';
+        document.getElementById('adminLoginError').style.display = 'none';
+        document.getElementById('adminLogin').style.display = 'flex';
+        document.getElementById('adminDashboard').classList.remove('active');
+        document.getElementById('adminPassInput').focus();
+    }
+}
+function closeAdmin() {
+    // Tutup panel tapi TIDAK hapus session — bisa buka lagi tanpa password
+    document.getElementById('adminOverlay').classList.remove('active');
+}
+function logoutAdmin() {
+    // Logout sungguhan: hapus session, next buka harus password lagi
+    setAdminAuthed(false);
+    sessionStorage.removeItem('kt_admin_panel');
+    document.getElementById('adminOverlay').classList.remove('active');
+    toast('👋 Logout berhasil. Sampai jumpa!');
+}
+function checkAdminPass() {
+    const input = document.getElementById('adminPassInput').value;
+    if (input === DATA.adminPass) {
+        setAdminAuthed(true);
+        document.getElementById('adminLogin').style.display = 'none';
+        document.getElementById('adminDashboard').classList.add('active');
+        switchPanel('hero');
+    } else {
+        document.getElementById('adminLoginError').style.display = 'block';
+        document.getElementById('adminPassInput').value = '';
+        document.getElementById('adminPassInput').focus();
+        document.getElementById('adminPassInput').style.border = '1px solid #f87171';
+        setTimeout(() => document.getElementById('adminPassInput').style.border = '', 1500);
+    }
+}
+
+// ============================================================
+//  ADMIN PANELS
+// ============================================================
+function switchPanel(panel) {
+    document.querySelectorAll('.admin-nav-item').forEach(n => n.classList.toggle('active', n.dataset.panel === panel));
+    sessionStorage.setItem('kt_admin_panel', panel);
+    renderAdminPanel(panel);
+}
+
+function renderAdminPanel(panel) {
+    const c = document.getElementById('adminContent');
+    const panels = {
+        hero: renderHeroPanel, profile: renderProfilePanel, visi: renderVisiPanel,
+        peran: renderPeranPanel, pengurus: renderPengurusPanel, seksi: renderSeksiPanel,
+        highlight: renderHighlightPanel, program: renderProgramPanel, kontak: renderKontakPanel,
+        footer: renderFooterPanel, password: renderPasswordPanel,
+        'foto-logo': renderFotoLogoPanel, 'foto-bg': renderFotoBgPanel,
+        'foto-pengurus': renderFotoPengurusPanel
+    };
+    if (panels[panel]) panels[panel](c);
+}
+
+function field(label, id, value, type='input', rows=3) {
+    if (type === 'textarea') return `<div class="admin-field"><label class="admin-label">${label}</label><textarea class="admin-textarea" id="${id}" rows="${rows}">${value}</textarea></div>`;
+    return `<div class="admin-field"><label class="admin-label">${label}</label><input type="text" class="admin-text-input" id="${id}" value="${escHtml(value)}"></div>`;
+}
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function listEditor(containerId, items, label='Item') {
+    return `<div class="admin-list-container" id="${containerId}">${items.map((item,i) => `<div class="admin-list-item"><input type="text" value="${escHtml(item)}" data-index="${i}"><button class="admin-list-del" onclick="this.closest('.admin-list-item').remove()">✕</button></div>`).join('')}</div><button class="admin-list-add" onclick="addListItem('${containerId}','${label}')">+ Tambah ${label}</button>`;
+}
+function addListItem(containerId, label) {
+    const container = document.getElementById(containerId);
+    const div = document.createElement('div');
+    div.className = 'admin-list-item';
+    div.innerHTML = `<input type="text" placeholder="Isi ${label}..."><button class="admin-list-del" onclick="this.closest('.admin-list-item').remove()">✕</button>`;
+    container.appendChild(div);
+    div.querySelector('input').focus();
+}
+function getListValues(containerId) {
+    return [...document.querySelectorAll(`#${containerId} .admin-list-item input`)].map(i => i.value.trim()).filter(Boolean);
+}
+
+// Upload zone helper dengan drag & drop
+function makeUploadZone(id, accept, onchange, multiple=false, hint='') {
+    return `<div class="photo-upload-zone" id="${id}-zone"
+        ondragover="event.preventDefault();this.classList.add('drag-over')"
+        ondragleave="this.classList.remove('drag-over')"
+        ondrop="this.classList.remove('drag-over');handleDrop(event,'${id}',${multiple},${JSON.stringify(onchange)})">
+        <input type="file" accept="${accept}" ${multiple?'multiple':''} onchange="${onchange}" id="${id}-input">
+        <div class="upload-icon">📁</div>
+        <p>Klik atau <strong>seret foto</strong> ke sini</p>
+        <p class="upload-hint">${hint || 'Format: JPG, PNG, WEBP · Semua ukuran diterima'}</p>
+    </div>
+    <div class="upload-progress-wrap" id="${id}-progress">
+        <div class="upload-progress-label" id="${id}-progress-label">⏳ Memproses...</div>
+        <div class="upload-progress-bar-bg"><div class="upload-progress-bar" id="${id}-progress-bar"></div></div>
+    </div>`;
+}
+
+function showProgress(id, label, pct) {
+    const wrap = document.getElementById(id + '-progress');
+    const lbl = document.getElementById(id + '-progress-label');
+    const bar = document.getElementById(id + '-progress-bar');
+    if (wrap) wrap.classList.add('active');
+    if (lbl) lbl.textContent = label;
+    if (bar) bar.style.width = pct + '%';
+}
+function hideProgress(id) {
+    const wrap = document.getElementById(id + '-progress');
+    if (wrap) wrap.classList.remove('active');
+}
+
+// Drag & drop handler
+function handleDrop(event, id, multiple, onchangeStr) {
+    event.preventDefault();
+    const input = document.getElementById(id + '-input');
+    if (!input) return;
+    // Buat DataTransfer baru dan set file
+    try {
+        const dt = new DataTransfer();
+        const files = event.dataTransfer.files;
+        for (let f of files) dt.items.add(f);
+        input.files = dt.files;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+    } catch(e) {
+        // Browser tidak support DataTransfer constructor - fallback
+        toast('Coba klik tombol upload untuk memilih foto', false);
+    }
+}
+
+// --- Hero Panel ---
+function renderHeroPanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">🏠 Beranda / Hero</div><div class="admin-panel-sub">Ubah teks utama yang tampil di halaman pertama</div><div class="admin-field-group"><h4>Nama Organisasi (Header & Hero)</h4>${field('Nama Organisasi di Header','f-orgname',DATA.orgName)}${field('Judul Hero','f-hero-title',DATA.hero.title)}${field('Subtitle / Tagline','f-hero-sub',DATA.hero.subtitle)}${field('Teks Tombol','f-hero-btn',DATA.hero.btnText)}${field('Link Tombol','f-hero-link',DATA.hero.btnLink)}</div><button class="admin-btn-sm save" style="padding:10px 24px;" onclick="saveHero()">💾 Simpan Beranda</button>`;
+}
+function saveHero() {
+    DATA.orgName = document.getElementById('f-orgname').value;
+    DATA.hero.title = document.getElementById('f-hero-title').value;
+    DATA.hero.subtitle = document.getElementById('f-hero-sub').value;
+    DATA.hero.btnText = document.getElementById('f-hero-btn').value;
+    DATA.hero.btnLink = document.getElementById('f-hero-link').value;
+    saveData(); renderSite(); toast('Beranda tersimpan!');
+}
+
+// --- Profile Panel ---
+function renderProfilePanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">👤 Profil Organisasi</div><div class="admin-panel-sub">Ubah deskripsi profil dan institusi pendukung</div><div class="admin-field-group"><h4>Deskripsi Profil</h4>${field('Deskripsi','f-profile-desc',DATA.profile.desc,'textarea',5)}${field('Nama Institusi Pendukung','f-profile-inst',DATA.profile.institution)}</div><button class="admin-btn-sm save" style="padding:10px 24px;" onclick="saveProfile()">💾 Simpan Profil</button>`;
+}
+function saveProfile() {
+    DATA.profile.desc = document.getElementById('f-profile-desc').value;
+    DATA.profile.institution = document.getElementById('f-profile-inst').value;
+    saveData(); renderSite(); toast('Profil tersimpan!');
+}
+
+// --- Visi Misi Panel ---
+function renderVisiPanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">🎯 Visi & Misi</div><div class="admin-panel-sub">Ubah visi dan daftar misi organisasi</div><div class="admin-field-group"><h4>Visi</h4>${field('Pernyataan Visi','f-visi',DATA.visi,'textarea',4)}</div><div class="admin-field-group"><h4>Misi</h4>${listEditor('misi-editor',DATA.misi,'Misi')}</div><button class="admin-btn-sm save" style="padding:10px 24px;" onclick="saveVisi()">💾 Simpan Visi & Misi</button>`;
+}
+function saveVisi() {
+    DATA.visi = document.getElementById('f-visi').value;
+    DATA.misi = getListValues('misi-editor');
+    saveData(); renderSite(); toast('Visi & Misi tersimpan!');
+}
+
+// --- Peran Panel ---
+function renderPeranPanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">⚙️ Peran Organisasi</div><div class="admin-panel-sub">Ubah daftar peran yang ditampilkan</div><div class="admin-field-group"><h4>Daftar Peran</h4>${listEditor('peran-editor',DATA.peran,'Peran')}</div><button class="admin-btn-sm save" style="padding:10px 24px;" onclick="savePeran()">💾 Simpan Peran</button>`;
+}
+function savePeran() { DATA.peran = getListValues('peran-editor'); saveData(); renderSite(); toast('Peran tersimpan!'); }
+
+// --- Pengurus Panel ---
+function renderPengurusPanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">👑 Pengurus Inti</div><div class="admin-panel-sub">Tambah, ubah, atau hapus pengurus inti</div><div class="admin-field-group"><h4>Daftar Pengurus</h4><div class="admin-card-grid" id="pengurus-editor">${DATA.pengurus.map((p,i) => `<div class="admin-card-edit" data-index="${i}"><button class="admin-card-edit-del" onclick="delPengurus(${i})">✕</button><input class="card-icon-input" placeholder="Icon" value="${escHtml(p.icon)}"><input placeholder="Jabatan" value="${escHtml(p.jabatan)}"><input placeholder="Nama" value="${escHtml(p.nama)}"></div>`).join('')}</div><button class="admin-list-add" style="margin-top:10px;" onclick="addPengurus()">+ Tambah Pengurus</button></div><button class="admin-btn-sm save" style="padding:10px 24px;" onclick="savePengurus()">💾 Simpan Pengurus</button>`;
+}
+function addPengurus() { DATA.pengurus.push({icon:'👤',jabatan:'Jabatan Baru',nama:'Nama'}); renderAdminPanel('pengurus'); }
+function delPengurus(i) { DATA.pengurus.splice(i,1); renderAdminPanel('pengurus'); }
+function savePengurus() {
+    const cards = document.querySelectorAll('#pengurus-editor .admin-card-edit');
+    DATA.pengurus = [...cards].map(card => { const inp = card.querySelectorAll('input'); return {icon:inp[0].value,jabatan:inp[1].value,nama:inp[2].value}; });
+    saveData(); renderSite(); toast('Pengurus tersimpan!');
+}
+
+// --- Seksi Panel ---
+function renderSeksiPanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">👥 Seksi-Seksi</div><div class="admin-panel-sub">Ubah seksi dan anggota masing-masing seksi</div><div id="seksi-editor">${DATA.seksi.map((s,i) => `<div class="admin-accordion-group" data-seksi="${i}"><div class="admin-accordion-group-header"><input style="width:50px;" placeholder="Icon" value="${escHtml(s.icon)}"><input placeholder="Nama Seksi" value="${escHtml(s.nama)}"><button class="admin-list-del" onclick="delSeksi(${i})" style="flex-shrink:0;">✕</button></div><div class="admin-accordion-group-body"><div class="admin-sidebar-label" style="padding:0 0 8px;margin:0;">ANGGOTA</div>${listEditor('seksi-anggota-'+i,s.anggota,'Anggota')}</div></div>`).join('')}</div><button class="admin-list-add" onclick="addSeksi()">+ Tambah Seksi Baru</button><br><br><button class="admin-btn-sm save" style="padding:10px 24px;" onclick="saveSeksi()">💾 Simpan Seksi</button>`;
+}
+function addSeksi() { DATA.seksi.push({icon:'📌',nama:'Seksi Baru',anggota:['Nama Anggota']}); renderAdminPanel('seksi'); }
+function delSeksi(i) { DATA.seksi.splice(i,1); renderAdminPanel('seksi'); }
+function saveSeksi() {
+    const groups = document.querySelectorAll('#seksi-editor .admin-accordion-group');
+    DATA.seksi = [...groups].map((g,i) => { const inp = g.querySelectorAll('.admin-accordion-group-header input'); return {icon:inp[0].value,nama:inp[1].value,anggota:getListValues('seksi-anggota-'+i)}; });
+    saveData(); renderSite(); toast('Seksi tersimpan!');
+}
+
+// --- Highlight Panel (async) ---
+async function renderHighlightPanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">⭐ Highlight Kegiatan Unggulan</div><div class="admin-panel-sub">Ubah atau tambah kegiatan unggulan</div><div id="highlight-editor"><div style="text-align:center;color:#94a3b8;padding:20px;">⏳ Memuat...</div></div><button class="admin-list-add" onclick="addHighlight()">+ Tambah Highlight Kegiatan</button><br><br><button class="admin-btn-sm save" style="padding:10px 24px;" onclick="saveHighlight()">💾 Simpan Highlight</button>`;
+    
+    const editor = document.getElementById('highlight-editor');
+    let html = '';
+    for (let i = 0; i < DATA.highlight.length; i++) {
+        const h = DATA.highlight[i];
+        const imgSrc = h.imgKey ? await getPhoto(h.imgKey) : null;
+        html += `<div class="admin-highlight-item">
+            <div style="display:flex;gap:8px;margin-bottom:12px;">
+                <input style="width:60px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px;font-size:1.2rem;text-align:center;" placeholder="Icon" value="${escHtml(h.icon)}" id="hl-icon-${i}">
+                <input style="flex:1;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;font-size:0.9rem;" placeholder="Judul Kegiatan" value="${escHtml(h.title)}" id="hl-title-${i}">
+                <button class="admin-list-del" style="flex-shrink:0;" onclick="delHighlight(${i})">✕</button>
+            </div>
+            <input style="width:100%;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;font-size:0.85rem;margin-bottom:10px;" placeholder="Penanggung Jawab" value="${escHtml(h.pic)}" id="hl-pic-${i}">
+            <div style="margin-bottom:10px;">
+                <div class="admin-label">FOTO DOKUMENTASI</div>
+                ${imgSrc ? `<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                    <img src="${imgSrc}" style="width:100px;height:65px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;">
+                    <button class="admin-btn-sm" style="color:#ef4444;border-color:#fecaca;" onclick="delHighlightFoto(${i})">🗑 Hapus Foto</button>
+                </div>` : `<div style="color:#94a3b8;font-size:0.8rem;padding:6px 0;">Belum ada foto</div>`}
+                ${makeUploadZone('hl-foto-'+i,'image/*',`uploadHighlightFoto(this,${i})`,false,`JPG, PNG, WEBP · Ukuran apa pun`)}
+            </div>
+            <div class="admin-label">POIN-POIN KEGIATAN</div>
+            ${listEditor('hl-items-'+i,h.items,'Poin')}
+        </div>`;
+    }
+    editor.innerHTML = html || '<div style="color:#94a3b8;text-align:center;padding:20px;">Belum ada highlight. Klik tombol di bawah untuk menambah.</div>';
+}
+
+function addHighlight() {
+    DATA.highlight.push({icon:'🎯',title:'Kegiatan Baru',pic:'Penanggung Jawab',imgKey:null,items:['✅ Deskripsi kegiatan']});
+    renderAdminPanel('highlight');
+}
+async function delHighlight(i) {
+    if (DATA.highlight[i].imgKey) await deletePhoto(DATA.highlight[i].imgKey);
+    DATA.highlight.splice(i,1);
+    renderAdminPanel('highlight');
+}
+function saveHighlight() {
+    DATA.highlight = DATA.highlight.map((h,i) => ({
+        icon: document.getElementById('hl-icon-'+i)?.value || h.icon,
+        title: document.getElementById('hl-title-'+i)?.value || h.title,
+        pic: document.getElementById('hl-pic-'+i)?.value || h.pic,
+        imgKey: h.imgKey || null,
+        items: getListValues('hl-items-'+i)
+    }));
+    saveData(); renderSite(); toast('Highlight tersimpan!');
+}
+async function uploadHighlightFoto(input, i) {
+    if (!input.files || !input.files[0]) return;
+    showProgress('hl-foto-'+i, '⏳ Mengompres foto...', 30);
+    try {
+        const dataUrl = await compressImageSafe(input.files[0], 1200, 0.82);
+        showProgress('hl-foto-'+i, '⏳ Menyimpan...', 80);
+        // Hapus foto lama jika ada
+        if (DATA.highlight[i].imgKey) await deletePhoto(DATA.highlight[i].imgKey);
+        const key = 'highlight_' + i + '_' + Date.now();
+        await savePhoto(key, dataUrl);
+        DATA.highlight[i].imgKey = key;
+        await saveData();
+        hideProgress('hl-foto-'+i);
+        renderSite(); renderAdminPanel('highlight');
+        toast('✅ Foto kegiatan tersimpan!');
+    } catch(e) { hideProgress('hl-foto-'+i); toast('❌ Gagal upload foto', true); console.error(e); }
+}
+async function delHighlightFoto(i) {
+    if (DATA.highlight[i].imgKey) await deletePhoto(DATA.highlight[i].imgKey);
+    DATA.highlight[i].imgKey = null;
+    await saveData(); renderSite(); renderAdminPanel('highlight');
+    toast('Foto dihapus');
+}
+
+// --- Program Panel ---
+function renderProgramPanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">📋 Program Kerja 2026</div><div class="admin-panel-sub">Ubah atau tambah program kerja per seksi</div><div id="program-editor">${DATA.program.map((p,i) => `<div class="admin-accordion-group"><div class="admin-accordion-group-header"><input style="width:50px;" placeholder="Icon" value="${escHtml(p.icon)}"><input placeholder="Nama Seksi/Program" value="${escHtml(p.nama)}"><button class="admin-list-del" onclick="delProgram(${i})" style="flex-shrink:0;">✕</button></div><div class="admin-accordion-group-body"><div class="admin-sidebar-label" style="padding:0 0 8px;margin:0;">PROGRAM KEGIATAN</div>${listEditor('prog-items-'+i,p.items,'Program')}</div></div>`).join('')}</div><button class="admin-list-add" onclick="addProgram()">+ Tambah Kelompok Program</button><br><br><button class="admin-btn-sm save" style="padding:10px 24px;" onclick="saveProgram()">💾 Simpan Program Kerja</button>`;
+}
+function addProgram() { DATA.program.push({icon:'📌',nama:'Seksi Baru',items:['Program 1']}); renderAdminPanel('program'); }
+function delProgram(i) { DATA.program.splice(i,1); renderAdminPanel('program'); }
+function saveProgram() {
+    const groups = document.querySelectorAll('#program-editor .admin-accordion-group');
+    DATA.program = [...groups].map((g,i) => { const inp = g.querySelectorAll('.admin-accordion-group-header input'); return {icon:inp[0].value,nama:inp[1].value,items:getListValues('prog-items-'+i)}; });
+    saveData(); renderSite(); toast('Program Kerja tersimpan!');
+}
+
+// --- Kontak Panel ---
+function renderKontakPanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">📞 Kontak</div><div class="admin-panel-sub">Ubah narahubung dan media sosial</div>
+    <div class="admin-field-group"><h4>Narahubung</h4><div id="persons-editor">${DATA.kontakPersons.map((k,i) => `<div class="admin-contact-person"><button class="admin-card-edit-del" onclick="delPerson(${i})">✕</button><input placeholder="Nama" value="${escHtml(k.nama)}" id="cp-nama-${i}"><input placeholder="No. Telp (tanpa strip)" value="${escHtml(k.telp)}" id="cp-telp-${i}"><input placeholder="Tampilan (0877-8185-8105)" value="${escHtml(k.display)}" id="cp-disp-${i}"></div>`).join('')}</div><button class="admin-list-add" onclick="addPerson()">+ Tambah Narahubung</button></div>
+    <div class="admin-field-group"><h4>Media Sosial & Email</h4><div id="sosmed-editor">${DATA.kontakSosmed.map((s,i) => `<div class="admin-contact-person"><button class="admin-card-edit-del" onclick="delSosmed(${i})">✕</button><div style="display:flex;gap:8px;"><input style="width:60px;" placeholder="Icon" value="${escHtml(s.icon)}" id="sm-icon-${i}"><input style="flex:1;" placeholder="Platform" value="${escHtml(s.platform)}" id="sm-platform-${i}"></div><input placeholder="Value (@username / email)" value="${escHtml(s.value)}" id="sm-value-${i}"><input placeholder="Link (https://...)" value="${escHtml(s.link)}" id="sm-link-${i}"></div>`).join('')}</div><button class="admin-list-add" onclick="addSosmed()">+ Tambah Media Sosial</button></div>
+    <button class="admin-btn-sm save" style="padding:10px 24px;" onclick="saveKontak()">💾 Simpan Kontak</button>`;
+}
+function addPerson() { DATA.kontakPersons.push({nama:'Nama Baru',telp:'08xxxxxxxxxx',display:'08xx-xxxx-xxxx'}); renderAdminPanel('kontak'); }
+function delPerson(i) { DATA.kontakPersons.splice(i,1); renderAdminPanel('kontak'); }
+function addSosmed() { DATA.kontakSosmed.push({icon:'📌',platform:'Platform',value:'@username',link:'https://'}); renderAdminPanel('kontak'); }
+function delSosmed(i) { DATA.kontakSosmed.splice(i,1); renderAdminPanel('kontak'); }
+function saveKontak() {
+    DATA.kontakPersons = DATA.kontakPersons.map((_,i) => ({nama:document.getElementById('cp-nama-'+i)?.value||'',telp:document.getElementById('cp-telp-'+i)?.value||'',display:document.getElementById('cp-disp-'+i)?.value||''}));
+    DATA.kontakSosmed = DATA.kontakSosmed.map((_,i) => ({icon:document.getElementById('sm-icon-'+i)?.value||'',platform:document.getElementById('sm-platform-'+i)?.value||'',value:document.getElementById('sm-value-'+i)?.value||'',link:document.getElementById('sm-link-'+i)?.value||''}));
+    saveData(); renderSite(); toast('Kontak tersimpan!');
+}
+
+// --- Footer Panel ---
+function renderFooterPanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">🔻 Footer</div><div class="admin-panel-sub">Ubah teks bagian bawah halaman</div><div class="admin-field-group"><h4>Teks Footer</h4>${field('Teks Footer','f-footer',DATA.footer)}</div><button class="admin-btn-sm save" style="padding:10px 24px;" onclick="saveFooter()">💾 Simpan Footer</button>`;
+}
+function saveFooter() { DATA.footer = document.getElementById('f-footer').value; saveData(); renderSite(); toast('Footer tersimpan!'); }
+
+// --- Password Panel ---
+function renderPasswordPanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">🔑 Ubah Password Admin</div><div class="admin-panel-sub">Ganti password untuk mengakses panel admin</div><div class="admin-field-group"><h4>Password</h4><div class="admin-field"><label class="admin-label">PASSWORD LAMA</label><input type="password" class="admin-text-input" id="f-pass-old"></div><div class="admin-field"><label class="admin-label">PASSWORD BARU</label><input type="password" class="admin-text-input" id="f-pass-new"></div><div class="admin-field"><label class="admin-label">KONFIRMASI PASSWORD BARU</label><input type="password" class="admin-text-input" id="f-pass-confirm"></div></div><button class="admin-btn-sm save" style="padding:10px 24px;" onclick="changePass()">🔑 Ganti Password</button><div id="pass-msg" style="margin-top:12px;font-size:0.85rem;"></div>`;
+}
+function changePass() {
+    const old = document.getElementById('f-pass-old').value;
+    const nw = document.getElementById('f-pass-new').value;
+    const cf = document.getElementById('f-pass-confirm').value;
+    const msg = document.getElementById('pass-msg');
+    if (old !== DATA.adminPass) { msg.style.color='#f87171'; msg.textContent='❌ Password lama salah.'; return; }
+    if (!nw) { msg.style.color='#f87171'; msg.textContent='❌ Password baru tidak boleh kosong.'; return; }
+    if (nw !== cf) { msg.style.color='#f87171'; msg.textContent='❌ Konfirmasi password tidak cocok.'; return; }
+    DATA.adminPass = nw; saveData();
+    msg.style.color='#4ade80'; msg.textContent='✅ Password berhasil diubah!';
+    document.getElementById('f-pass-old').value=''; document.getElementById('f-pass-new').value=''; document.getElementById('f-pass-confirm').value='';
+}
+
+// ============================================================
+//  FOTO LOGO PANEL (async)
+// ============================================================
+async function renderFotoLogoPanel(c) {
+    const logoMain = await getPhoto('logoMain');
+    const logoFooter = await getPhoto('logoFooter');
+    c.innerHTML = `
+        <div class="admin-panel-title">🏷️ Logo Organisasi</div>
+        <div class="admin-panel-sub">Ganti logo yang tampil di header, profil, dan footer website</div>
+        <div class="info-box"><strong>ℹ️ Tentang Upload Logo</strong>Foto ukuran apa pun bisa diupload. Sistem akan otomatis mengompres agar loading tetap cepat. Format PNG transparan sangat disarankan untuk logo agar tampil bersih di semua latar.</div>
+        <div class="admin-field-group">
+            <h4>Logo Utama (Header & Profil)</h4>
+            ${logoMain ? `<div style="margin-bottom:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                <img src="${logoMain}" style="height:60px;width:auto;object-fit:contain;border:1px solid #e2e8f0;border-radius:8px;padding:8px;background:#f8fafc;">
+                <button class="admin-btn-sm danger" onclick="removeLogo('main')">🗑 Hapus & Pakai Default</button>
+            </div>` : `<div class="warn-box">Menggunakan file default: <code>logo-uta.png</code></div>`}
+            ${makeUploadZone('logo-main','image/*','uploadLogo(this,"main")',false,'PNG transparan disarankan · JPG, WEBP juga bisa')}
+        </div>
+        <div class="admin-field-group">
+            <h4>Logo Footer</h4>
+            ${logoFooter ? `<div style="margin-bottom:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                <img src="${logoFooter}" style="height:60px;width:auto;object-fit:contain;border:1px solid #e2e8f0;border-radius:8px;padding:8px;background:#1e3c72;">
+                <button class="admin-btn-sm danger" onclick="removeLogo('footer')">🗑 Hapus & Pakai Default</button>
+            </div>` : `<div class="warn-box">Menggunakan file default: <code>logo-uta-Merah-bergandengan2022.png</code></div>`}
+            ${makeUploadZone('logo-footer','image/*','uploadLogo(this,"footer")',false,'Logo footer biasanya lebih lebar · PNG disarankan')}
+        </div>
+        <div class="admin-field-group"><h4>Teks Alt Logo</h4>${field('Teks Alt (untuk aksesibilitas)','f-logo-alt',DATA.logoAlt||"Logo UTA'45 Jakarta")}<button class="admin-btn-sm save" style="padding:8px 20px;margin-top:6px;" onclick="saveLogoAlt()">💾 Simpan Alt</button></div>
+    `;
+}
+
+async function uploadLogo(input, type) {
+    if (!input.files || !input.files[0]) return;
+    const zoneId = type === 'main' ? 'logo-main' : 'logo-footer';
+    showProgress(zoneId, '⏳ Mengompres logo...', 40);
+    try {
+        const dataUrl = await compressImageSafe(input.files[0], 800, 0.9);
+        showProgress(zoneId, '⏳ Menyimpan...', 80);
+        const key = type === 'main' ? 'logoMain' : 'logoFooter';
+        await savePhoto(key, dataUrl);
+        await saveData(); renderSite(); renderAdminPanel('foto-logo');
+        hideProgress(zoneId);
+        toast(`✅ Logo ${type === 'main' ? 'utama' : 'footer'} berhasil diupload!`);
+    } catch(e) { hideProgress(zoneId); toast('❌ Gagal upload logo', true); console.error(e); }
+}
+async function removeLogo(type) {
+    if (!confirm(`Hapus logo ${type === 'main' ? 'utama' : 'footer'} dan pakai default?`)) return;
+    const key = type === 'main' ? 'logoMain' : 'logoFooter';
+    await deletePhoto(key); await saveData(); renderSite(); renderAdminPanel('foto-logo');
+    toast('Logo direset ke default');
+}
+function saveLogoAlt() { DATA.logoAlt = document.getElementById('f-logo-alt').value; saveData(); renderSite(); toast('✅ Alt logo tersimpan!'); }
+
+// ============================================================
+//  FOTO BACKGROUND PANEL (async)
+// ============================================================
+async function renderFotoBgPanel(c) {
+    const hasBg = await getPhoto('heroBg');
+    c.innerHTML = `
+        <div class="admin-panel-title">🖼️ Foto Background Hero</div>
+        <div class="admin-panel-sub">Ganti background foto di bagian atas halaman (Hero Section)</div>
+        <div class="info-box"><strong>ℹ️ Tentang Upload Background</strong>Foto ukuran apa pun bisa diterima. Foto besar (>3MB) akan otomatis dikompres agar tidak memenuhi ruang penyimpanan. Disarankan foto horizontal/landscape.</div>
+        <div class="admin-field-group">
+            <h4>Preview Background Saat Ini</h4>
+            ${hasBg ? `<div style="position:relative;width:100%;height:220px;border-radius:12px;overflow:hidden;border:2px solid #3b82f6;margin-bottom:14px;">
+                <img src="${hasBg}" alt="Preview" style="width:100%;height:100%;object-fit:cover;">
+                <div style="position:absolute;inset:0;background:linear-gradient(rgba(30,60,114,0.5),rgba(59,130,246,0.5));display:flex;align-items:center;justify-content:center;color:white;font-size:0.85rem;">Preview dengan overlay biru</div>
+            </div>
+            <button class="admin-btn-sm danger" style="margin-bottom:14px;" onclick="removeBg()">🗑 Hapus Background</button>` 
+            : `<div style="background:linear-gradient(135deg,#f0f7ff,#dbeafe);border:2px dashed #3b82f6;border-radius:12px;padding:32px;text-align:center;color:#64748b;margin-bottom:14px;"><div style="font-size:3rem;margin-bottom:8px;">🖼️</div><p>Belum ada foto background</p><p style="font-size:0.8rem;margin-top:4px;">Menggunakan warna gradasi biru bawaan</p></div>`}
+            ${makeUploadZone('bg-upload','image/*','uploadBg(this)',false,'JPG, PNG, WEBP · Semua ukuran diterima, otomatis dikompres')}
+        </div>
+        <div class="admin-field-group">
+            <h4>💡 Tips Background yang Bagus</h4>
+            <ul style="color:#64748b;font-size:0.82rem;padding-left:18px;line-height:2;">
+                <li>✨ Gunakan foto horizontal/landscape apa pun ukurannya</li>
+                <li>🎯 Pilih foto yang tidak terlalu ramai agar teks terbaca</li>
+                <li>🎨 Gambar akan otomatis diberi lapisan transparan biru gelap</li>
+                <li>💾 Foto disimpan di IndexedDB browser (kapasitas besar)</li>
+                <li>📏 Foto >5MB akan dikompres otomatis tanpa mengurangi kualitas visual</li>
+            </ul>
+        </div>
+    `;
+}
+async function uploadBg(input) {
+    if (!input.files || !input.files[0]) return;
+    showProgress('bg-upload', '⏳ Mengompres foto...', 30);
+    try {
+        const dataUrl = await compressImageSafe(input.files[0], 1920, 0.82);
+        showProgress('bg-upload', '⏳ Menyimpan ke IndexedDB...', 75);
+        await savePhoto('heroBg', dataUrl);
+        await saveData(); renderSite(); renderAdminPanel('foto-bg');
+        hideProgress('bg-upload');
+        toast('✅ Background berhasil diupload!');
+    } catch(e) { hideProgress('bg-upload'); toast('❌ Gagal upload foto', true); console.error(e); }
+}
+async function removeBg() {
+    if (!confirm('Hapus foto background?')) return;
+    await deletePhoto('heroBg');
+    const heroEl = document.getElementById('home');
+    heroEl.style.backgroundImage = '';
+    await saveData(); renderAdminPanel('foto-bg');
+    toast('Background dihapus');
+}
+
+// ============================================================
+//  FOTO PENGURUS PANEL (async)
+// ============================================================
+async function renderFotoPengurusPanel(c) {
+    c.innerHTML = `<div class="admin-panel-title">👤 Foto Pengurus & Anggota</div><div class="admin-panel-sub">Upload foto profil untuk pengurus inti dan anggota seksi</div><div id="foto-pengurus-content"><div style="text-align:center;padding:20px;color:#94a3b8;">⏳ Memuat...</div></div>`;
+    
+    let html = `<div class="admin-field-group"><h4>Pengurus Inti</h4><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;">`;
+    for (const p of DATA.pengurus) {
+        const foto = await getPhoto('pengurus_' + p.nama);
+        html += fotoPersonCard(p.nama, p.jabatan, p.icon, foto);
+    }
+    html += `</div></div>`;
+
+    for (const s of DATA.seksi) {
+        html += `<div class="admin-field-group"><h4>${s.icon} ${s.nama}</h4><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">`;
+        for (const a of s.anggota) {
+            const foto = await getPhoto('pengurus_' + a);
+            html += fotoPersonCard(a, s.nama, '👤', foto);
+        }
+        html += `</div></div>`;
+    }
+
+    document.getElementById('foto-pengurus-content').innerHTML = html;
+}
+
+function fotoPersonCard(nama, jabatan, icon, foto) {
+    return `<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px;text-align:center;">
+        ${foto ? `<div style="position:relative;display:inline-block;margin-bottom:10px;">
+            <img src="${foto}" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid #3b82f6;">
+            <button onclick="delFotoPengurus('${escHtml(nama)}')" style="position:absolute;top:-4px;right:-4px;background:rgba(248,113,113,0.2);border:1px solid #f87171;color:#ef4444;width:20px;height:20px;border-radius:50%;cursor:pointer;font-size:0.65rem;line-height:1;">✕</button>
+        </div>` : `<div style="width:72px;height:72px;border-radius:50%;background:rgba(59,130,246,0.1);border:2px dashed rgba(59,130,246,0.3);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 10px;">${icon}</div>`}
+        <div style="color:#1e293b;font-size:0.82rem;font-weight:600;margin-bottom:2px;">${escHtml(nama)}</div>
+        <div style="color:#94a3b8;font-size:0.72rem;margin-bottom:10px;">${escHtml(jabatan)}</div>
+        <label style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.35);color:#1d4ed8;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:0.75rem;display:inline-block;position:relative;">
+            ${foto ? '🔄 Ganti' : '📷 Upload'}
+            <input type="file" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;" onchange="uploadFotoPengurus(this,'${escHtml(nama)}')">
+        </label>
+    </div>`;
+}
+
+async function uploadFotoPengurus(input, nama) {
+    if (!input.files || !input.files[0]) return;
+    toast('⏳ Memproses foto...');
+    try {
+        const dataUrl = await compressImageSafe(input.files[0], 600, 0.85);
+        await savePhoto('pengurus_' + nama, dataUrl);
+        await saveData(); renderSite(); renderAdminPanel('foto-pengurus');
+        toast(`✅ Foto ${nama} tersimpan!`);
+    } catch(e) { toast('❌ Gagal upload foto', true); console.error(e); }
+}
+async function delFotoPengurus(nama) {
+    if (!confirm(`Hapus foto ${nama}?`)) return;
+    await deletePhoto('pengurus_' + nama);
+    await saveData(); renderSite(); renderAdminPanel('foto-pengurus');
+    toast('Foto dihapus');
+}
+
+// ============================================================
+//  SAVE ALL + RESET
+// ============================================================
+async function saveAllData() {
+    const activePanel = document.querySelector('.admin-nav-item.active')?.dataset?.panel;
+    const saveFuncs = { hero: saveHero, profile: saveProfile, visi: saveVisi, peran: savePeran, pengurus: savePengurus, seksi: saveSeksi, highlight: saveHighlight, program: saveProgram, kontak: saveKontak, footer: saveFooter };
+    try { if (saveFuncs[activePanel]) saveFuncs[activePanel](); } catch(e) {}
+    await saveData(); renderSite(); toast('✅ Semua data berhasil disimpan!');
+}
+
+async function resetToDefault() {
+    if (!confirm('⚠️ Reset semua konten ke pengaturan awal? Semua teks dan foto yang sudah disimpan akan hilang.')) return;
+    try {
+        const allKeys = await dbGetAllKeys(STORE_PHOTOS);
+        for (const key of allKeys) await deletePhoto(key);
+    } catch(e) {}
+    DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    await saveData(); renderSite();
+    const activePanel = document.querySelector('.admin-nav-item.active')?.dataset?.panel || 'hero';
+    renderAdminPanel(activePanel);
+    toast('↺ Data direset ke default!');
+}
+
+// ============================================================
+//  TOAST
+// ============================================================
+let toastTimer;
+function toast(msg, isError = false) {
+    const el = document.getElementById('adminToast');
+    el.textContent = msg;
+    el.classList.toggle('error', isError);
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ============================================================
+//  INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadData();
+    await renderSite();
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+        });
+    });
+});
+</script>
+</body>
+</html>
